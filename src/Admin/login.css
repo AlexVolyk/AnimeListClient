@@ -1,0 +1,24 @@
+.sign-log{
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 25vh;
+    padding: 20px;
+    background-color: cornflowerblue;
+}
+
+form{
+    display: inline-grid;
+}
+
+input {
+    margin-bottom: 10px;
+    padding: 6px;
+    border-radius: 10px;
+    outline: none;
+}
+button {
+    margin-bottom: 10px;
+    padding: 6px;
+    border-radius: 10px;
+    outline: none;
+}

@@ -1,0 +1,26 @@
+.header-top{
+    margin-top: 50px;
+    margin-right: 200px;
+    float: right;
+}
+
+.header-btn{
+    padding: 10px 25px;
+    border: 1px solid black;
+}
+
+.header-btn:hover{
+    opacity: 0.7;
+}
+
+.header-btn:first-child{
+    background-color: rgb(134, 128, 128);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.header-btn:last-child{
+    background-color: rgb(134, 128, 128);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
