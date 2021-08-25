@@ -9,7 +9,7 @@ type info = {
     userToken: string
 }
 
-export default class SignUp extends Component<{},info> {
+export default class Login extends Component<{},info> {
     constructor(props: any){
         super(props)
         this.state = {

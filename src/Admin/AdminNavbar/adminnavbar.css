@@ -1,0 +1,24 @@
+.admin-navbar{
+    position: fixed;
+}
+.admin-navbar ul{
+    list-style: none;
+    padding-left: 0;
+}
+
+.admin-navbar ul > li{
+    background-color: mediumslateblue;
+    transition: 0.3s;
+    transition-property: background-color;
+}
+
+.admin-navbar ul > li:hover{
+    background-color: rgb(140, 124, 233);
+    transition: 0.3s;
+    transition-property: background-color;
+}
+
+.admin-navbar li > button{
+    border: none;
+    background-color: transparent;
+}

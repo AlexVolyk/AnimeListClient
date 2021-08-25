@@ -1,6 +1,14 @@
 import React, {Component} from "react";
+import {Modal, Form} from 'react-bootstrap';
 import sweetalert2 from "sweetalert2"
-import './login.css';
+import './adminlogin.css';
+
+type parent = {
+    adminShowLoginFunction: any,
+    adminShowLogin: boolean,
+    gat: any,
+    gaia: any
+}
 
 type info = {
     username: string,
@@ -9,7 +17,7 @@ type info = {
     adminToken: string
 }
 
-export default class SignUp extends Component<{},info> {
+export default class SignUp extends Component<parent, info> {
     constructor(props: any){
         super(props)
         this.state = {
@@ -23,6 +31,7 @@ export default class SignUp extends Component<{},info> {
         this.setAdminToken = this.setAdminToken.bind(this);
         this.setUsername = this.setUsername.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);  // !
+        this.closeModal = this.closeModal.bind(this);
     }
     setUsername(e: React.ChangeEvent<HTMLInputElement>){
         this.setState({
@@ -52,8 +61,12 @@ export default class SignUp extends Component<{},info> {
         console.log(this.state.adminToken)
     }
 
+    closeModal() {
+        this.props.adminShowLoginFunction()
+        // window.location.assign('/')
+    }
+
     handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        // window.location.assign('login');
         e.preventDefault()
 
         const URL = 'http://localhost:3000/admin/login';
@@ -79,25 +92,40 @@ export default class SignUp extends Component<{},info> {
                         position: 'center',
                         title: json.message,
                         timer: 2000,
-                        icon: 'success'
+                        icon: 'success',
+                        showConfirmButton:false,
                     })
                     // this.setUsername(json.admin.username)
-                    this.setAdminToken(json.adminSessionToken)   
-                    console.log(this.state.adminToken) 
+                    this.props.gat(json.adminSessionToken)  
+                    this.props.gaia(json.admin.isAdmin) 
+                    console.log(json) 
+                    this.closeModal()
                 } else {
                     sweetalert2.fire({
                         position: 'center',
                         title: json.message,
                         timer: 2000,
-                        icon: 'error'
+                        icon: 'error',
+                        showConfirmButton:false,
                     })
                 }
             })
     }
     render(){
         return(
-            <div className="sign-log">
-                <form onSubmit={this.handleSubmit}>
+            <>
+        <Modal
+        show={true}
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        onHide={this.closeModal}
+        >
+            <Modal.Header closeButton>
+                <Modal.Title id='ModalHeader' onClick={this.closeModal}>Admin Login</Modal.Title>
+            </Modal.Header>
+            <Modal.Body className="modal-admlogin">
+            {/* <div className="sign-log"> */}
+                <Form onSubmit={this.handleSubmit}>
                     <input type="text"
                     id="username"
                     placeholder="username"
@@ -117,8 +145,10 @@ export default class SignUp extends Component<{},info> {
                     value={this.state.password}
                     />
                     <button type="submit">Submit</button>
-                </form>
-            </div>
+                    </Form>
+            </Modal.Body>
+        </Modal >
+        </>
         )
     }
 

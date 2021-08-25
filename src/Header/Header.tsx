@@ -4,56 +4,95 @@ import './header.css'
 import {Modal} from 'react-bootstrap';
 import SignUp from '../Auth/userSign-Log/SignUp'
 import Mod from '../Auth/userSign-Log/Mod'
+import AdminLogin from '../Admin/AdminLogin'
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    NavLink,
+    } from "react-router-dom";
+
+type prop = {
+    gut: any, 
+    gun: any, 
+    guia: any,
+    userIsAdmin: boolean,
+    gat: any,
+    gaia: any
+}
 
 type booleans = {
-    login: any,
-    showLogin: boolean,
-    showSignUp: boolean,
-    show: any,
+    showLoginFunction: any,
+    userShowLogin: boolean,
+    adminShowLogin: boolean,
+    adminShowLoginFunction: any
 }
-export default class Header extends Component<{}, booleans> {
+
+// const {username, usrt, usrtffff} = this.context
+export default class Header extends Component<prop, booleans> {
 constructor(props: any){
     super(props)
 
     this.state = {
         // login: 'assaasas',
-        show: '',
-        showLogin: false,
-        showSignUp: false,
-        login: this.setShowLogin,
+        userShowLogin: false,
+        showLoginFunction: this.setUserShowLogin,
+        adminShowLogin: false,
+        adminShowLoginFunction: this.setAdminShowLogin,
     }
-    this.setShowLogin = this.setShowLogin.bind(this)
-    this.setShowSignUp = this.setShowSignUp.bind(this)
+    this.setUserShowLogin = this.setUserShowLogin.bind(this)
+    this.setAdminShowLogin = this.setAdminShowLogin.bind(this)
 }
 
-setShowLogin(): void{
+setUserShowLogin = (): void => {
     this.setState({
-        showLogin: !this.state.showLogin
+        userShowLogin: !this.state.userShowLogin
     })
-    console.log(this.state.showLogin)
-    console.log('asasasasasas')
+    console.log(this.state.userShowLogin)
 }
 
-setShowSignUp(){
+setAdminShowLogin = (): void => {
     this.setState({
-        showSignUp: !this.state.showSignUp
+        adminShowLogin: !this.state.adminShowLogin
     })
-    console.log(this.state.showSignUp)
+    console.log(this.state.adminShowLogin)
 }
     render(){
+        // console.log(this.context, "CONTEXT")
+        // console.log(context.usrt, "CONTEXT")
 
         // let smt: void;
+// console.log(this.props.userIsAdmin, "NAVBAR ------------------------------")
         return(
             <div className="header">
-                <div className="header-top">
-                <button className="header-btn" onClick={this.setShowLogin}>Login</button>
-                    {this.state.showLogin ? <Mod {...this.state}/> : null}
-                    {/* <button className="header-btn" onClick={this.setShowLogin}>Login</button>
-                    {this.state.showLogin ? <Login /> : null} */}
-                    <button className="header-btn" onClick={this.setShowSignUp}>SignUp</button>
-                    {this.state.showSignUp ? <SignUp /> : null}
+                <div className="container-header">
+
+                    <Router>                
+                        <div className='logo'><NavLink to='/'>AnimeList</ NavLink></div>
+                        {/* {this.props.userIsAdmin ? <NavLink to="/"><button className="header-btn header-btn-signup">Admin Login</button></ NavLink> : null}  */}
+                        {this.props.userIsAdmin ? <button className="header-btn header-btn-signup" onClick={this.setAdminShowLogin}>Admin Login</button> : null} 
+                        {/* <button className="header-btn header-btn-login" onClick={this.setAdminShowLogin}><NavLink to='/login'>Login</ NavLink></button> */}
+                        {this.state.adminShowLogin ? <AdminLogin {...this.state} {...this.props} /> : null}
+                        <div className="header-top">
+                        {/* <button className="header-btn" onClick={this.setShowLogin}>Login</button>
+                            {this.state.showLogin ? <Mod {...this.state} {...this.props} /> : null} */}
+                            {/* <button className="header-btn" onClick={this.setShowLogin}>Login</button>
+                            {this.state.showLogin ? <Login /> : null} */}
+                            {/* <Router> */}
+                        <button className="header-btn header-btn-login" onClick={this.setUserShowLogin}><NavLink to='/login'>Login</ NavLink></button>
+                        {this.state.userShowLogin ? <Mod {...this.state} {...this.props} /> : null}
+                        <NavLink to="/register"><button className="header-btn header-btn-signup">SignUp</button></ NavLink>
+                        {/* {this.state.showSignUp ? <SignUp /> : null} */}
+
+                        <Switch>
+                            <Route path='/register'>
+                                <SignUp />
+                            </Route>
+                        </Switch>
+                    </div>
+                    </Router>
+                    {/* <div className="header-bottom"></div> */}
                 </div>
-                <div className="header-bottom"></div>
             </div>
         )
     }

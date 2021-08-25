@@ -6,6 +6,9 @@
     background-color: cornflowerblue;
 }
 
+.modal-admlogin{
+    text-align: center;
+}
 form{
     display: inline-grid;
 }
