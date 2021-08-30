@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import './display.css'
+import './displayanimelist.css'
 import Test from './Test'
 
 
@@ -13,13 +13,12 @@ type a = {
     k:any
 }
 
-export default class Display extends Component<props, t, a>{
+export default class DisplayAnimeList extends Component<props, t, a>{
     constructor(props: any){
         super(props)
         this.state = {
             sss: ''
         }
-        // this.show = this.show.bind(this)
     }
 
     componentDidMount(){
@@ -40,14 +39,14 @@ export default class Display extends Component<props, t, a>{
             animes = filtered
             console.log(animes)
 
-        } else  {
+        } else if (this.state.sss === '/delete/account')  {
+            animes = this.props.smt
+            console.log(animes)
+        } else {
             animes = this.props.smt
             console.log(animes)
         }
 
-        // console.log(filtered, "HERE")
-        // let animes = filtered
-        // console.log(animes)
 
         return(
             
@@ -66,9 +65,11 @@ export default class Display extends Component<props, t, a>{
             <>
             {animes.length !== 0 && animes[0] !== null ? (
                 animes.map((anime: any, key: number) => {
+                    let src = '/anime/' + anime.title_name.replaceAll(' ', "_")
+
                 return(
                 <div className="card-container" key={key}>
-                <img src={anime.img} alt="" />
+                <a href={src}><img src={anime.img} alt={anime.title_name} title={anime.title_name} /></a>
                 <div className="info">
                     <p>{anime.title_name}</p>
                     <p>{anime.title_english}</p>
@@ -80,10 +81,10 @@ export default class Display extends Component<props, t, a>{
                 </div>
                 {/* <Test k={key}/> */}
             </div>
-            // console.log(anime)
-            )})
+            )}, console.log(window.location.pathname)
+            )
             ) : (
-                <div>NOT FOUND</div>
+                <div className="not-found-animes">NOT FOUND</div>
                 )
                 }
             </>

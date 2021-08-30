@@ -31,7 +31,7 @@ type t = {
   showAdminPanel: boolean,
   setShowAdminPanel: any,
 
-  userId: number | string,
+  userId: number | string | any,
   gui: any
 
 
@@ -78,7 +78,7 @@ export default class App extends Component<{},t> {
     this.getUserId = this.getUserId.bind(this);
   }
 
-  getUserId(e: any ) {
+  getUserId = (e: any ) => {
     this.setState({
         userId: e
     })
@@ -96,7 +96,11 @@ export default class App extends Component<{},t> {
     }
     if (localStorage.getItem('userIsAdmin')){
       this.setState({userIsAdmin: localStorage.getItem('userIsAdmin')});
-      console.log(this.state.userIsAdmin ,"+++++++++++++++++++++++", "componentDidMount userToken")
+      console.log(this.state.userIsAdmin ,"+++++++++++++++++++++++", "componentDidMount userIsAdmin")
+    }
+    if (localStorage.getItem('userId')){
+      this.setState({userId: localStorage.getItem('userId')});
+      console.log(this.state.userId ,"+++++++++++++++++++++++", "componentDidMount userId")
     }
   }
 

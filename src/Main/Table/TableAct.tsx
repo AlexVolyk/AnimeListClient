@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import DisplayAct from "./Display/Display";
+import DisplayAct from "./Display/DisplayAnimeList";
 import './table.css'
 
 type tp = {

@@ -281,6 +281,7 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
             <Form className=" create-form" onSubmit={this.handleSubmit}>
                 <div className="container">
                     <div className="TItle">
+                        <label htmlFor="title_name">Title Name</label>
                         <input type="text" 
                         name="title_name" 
                         id="title_name"
@@ -292,6 +293,7 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
                         />
                     </div>
                     <div className="Title_english">
+                    <label htmlFor="title_english">Title English</label>
                         <input type="text" 
                         name="title_english" 
                         id="title_english"
@@ -303,6 +305,7 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
                         />
                     </div>
                     <div className="Description">
+                    <label htmlFor="description">Description</label>
                         <textarea 
                         name="description" 
                         id="description"
@@ -314,6 +317,7 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
                         />
                     </div>
                     <div className="Episodes">
+                    <label htmlFor="episodes">Episodes</label>
                         <input type="number" 
                         name="episodes" 
                         id="episodes"
@@ -326,6 +330,7 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
                         />
                     </div>
                     <div className="Studios">
+                    <label htmlFor="studios">Studios</label>
                         <input type="text" 
                         name="studios" 
                         id="studios"
@@ -337,6 +342,7 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
                         />
                     </div>
                     <div className="Genres">
+                    <label htmlFor="genres">Genres</label>
                         <input type="text" 
                         name="genres" 
                         id="genres"
@@ -348,6 +354,7 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
                         />
                     </div>
                     <div className="Duration">
+                    <label htmlFor="duration">Duration</label>
                         <input type="text" 
                         name="duration" 
                         id="duration"
@@ -359,6 +366,7 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
                         />
                     </div>
                     <div className="Rating">
+                    <label htmlFor="rating">Rating</label>
                         <input type="text" 
                         name="rating" 
                         id="rating"
@@ -370,6 +378,7 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
                         />
                     </div>
                     <div className="Poster">
+                    <label htmlFor="img">Poster</label>
                         <input type="text" 
                         name="img" 
                         id="img"
@@ -381,6 +390,7 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
                         />
                     </div>
                     <div className="Screensaver">
+                    <label htmlFor="youTubeImg">Screensaver</label>
                         <input type="text" 
                         name="youTubeImg" 
                         id="youTubeImg"
@@ -392,6 +402,7 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
                         />
                     </div>
                     <div className="YouTube-URL">
+                    <label htmlFor="youTubeVideo">YouTube URL</label>
                         <input type="text" 
                         name="youTubeVideo" 
                         id="youTubeVideo"

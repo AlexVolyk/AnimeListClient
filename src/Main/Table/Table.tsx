@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import Display from "./Display/Display";
+import DisplayAnimeList from "./Display/DisplayAnimeList";
 import './table.css'
 
 type tp = {
@@ -43,14 +43,11 @@ export default class Table extends Component<{},tp>{
     }
 
 
-
     render(){
         
-
-
         return(
             <div className="display-table">
-                <Display {...this.state}/>
+                <DisplayAnimeList {...this.state}/>
             </div>
         )
     }

@@ -58,9 +58,10 @@ export default class EditUser extends Component<props, info> {
     async handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         const ID = this.props.userId
+        console.log(ID)
         const URL = `http://localhost:3000/user/edit/user/${ID}`;
         fetch(URL, {
-            method: "DELETE",
+            method: "PUT",
             body: JSON.stringify({
                 user: {
                     username: this.state.username,
@@ -107,18 +108,27 @@ export default class EditUser extends Component<props, info> {
                     placeholder="username"
                     onChange={this.setUsername}
                     value={this.state.username}
+                    pattern="[\w+]{4,}"
+                    title="At least 4 characters"
+                    required
                     />
                     <input type="email"
                     id="email"
                     placeholder="email"
                     onChange={this.setEmail}
                     value={this.state.email}
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                    title="For example test@test.com"
+                    required
                     />
                     <input type="text" 
                     id="password"
                     placeholder="password"
                     onChange={this.setPassword}
                     value={this.state.password}
+                    pattern="[a-zA-z0-9]{5,}"
+                    title="At least 5 characters"
+                    required
                     />
                     <button className="signup-inner-btn" type="submit">Submit</button>
                 </form>

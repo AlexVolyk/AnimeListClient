@@ -12,7 +12,7 @@
 }
 
 .nav-item{
-    background-color: #fff;
+    background-color: inherit;
 }
 
 .menu{
@@ -21,4 +21,17 @@
 .menu-inner{
     display: flex;
     justify-content: flex-end;
+}
+.navbar-nav{
+    /* flex-direction: inherit !important; */
+    display: inline-flex !important;
+}
+.navbar-collapse{
+    background-color: white;
+}
+.block-inner {
+    padding: 10px;
+}
+.right-style{
+    flex-direction: inherit !important;
 }

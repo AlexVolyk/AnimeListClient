@@ -8,7 +8,7 @@ import {
     Switch,
     Route,
     NavLink,
-    Redirect
+    Redirect,
     } from "react-router-dom";
     
 // import dog from '../../img/dog.jpg'
@@ -37,8 +37,8 @@ export default class Login extends Component<parent,child> {
         super(props)
         
         this.state = {
-            email: 'kozaklyho@gmail.com',
-            password: 'kozaklyho',
+            email: '',
+            password: '',
             // userToken: '',
             username: '',
             // userId: 0,
@@ -123,7 +123,6 @@ export default class Login extends Component<parent,child> {
                     console.log(json)
                     this.props.gui(json.user.id)
                     this.setUsername(json.user.username)
-                    // this.setUserToken(json.userSessionToken)
                     this.props.gut(json.userSessionToken)
                     this.props.gun(json.user.username)
                     this.props.guia(json.user.isAdmin)
@@ -154,15 +153,11 @@ export default class Login extends Component<parent,child> {
 
                 }
             }) 
-            // var im = require('../../img/dog.jpg')
 
     }
     render(){
         return(
-            // <div className="here">
-                <>
-                {/* <img src={dog}/> */}
-                {/* {this.state.userId !== 0 ? <img src={im} style={{width:"400px !important", height: '200px !important', border: '1px solid black'}} alt="NO" /> : null} */}
+            <>
         <Modal
         show={true}
         aria-labelledby="contained-modal-title-vcenter"
@@ -191,7 +186,6 @@ export default class Login extends Component<parent,child> {
             </Modal.Body>
         </Modal >
         </>
-        // </div>
         )
     }
 }

@@ -199,18 +199,17 @@ export default class EditAnime extends Component<{adminToken: any, toggleEditFun
             <>
         <Modal
         show={true}
-        // aria-labelledby="contained-modal-title-vcenter"
-        // centered
         onHide={this.closeModal}
         fullscreen={true}
         >
             <Modal.Header closeButton>
-                <Modal.Title id='ModalHeader' onClick={this.closeModal}>Edit</Modal.Title>
+                <Modal.Title id='ModalHeader' onClick={this.closeModal}>Edit Anime</Modal.Title>
             </Modal.Header>
             <Modal.Body style={{margin: "0 auto"}}>
             <Form className="create-form" onSubmit={this.handleSubmit}>
-                <div className="container">
+            <div className="container">
                     <div className="TItle">
+                        <label htmlFor="title_name">Title Name</label>
                         <input type="text" 
                         name="title_name" 
                         id="title_name"
@@ -222,6 +221,7 @@ export default class EditAnime extends Component<{adminToken: any, toggleEditFun
                         />
                     </div>
                     <div className="Title_english">
+                    <label htmlFor="title_english">Title English</label>
                         <input type="text" 
                         name="title_english" 
                         id="title_english"
@@ -233,6 +233,7 @@ export default class EditAnime extends Component<{adminToken: any, toggleEditFun
                         />
                     </div>
                     <div className="Description">
+                    <label htmlFor="description">Description</label>
                         <textarea 
                         name="description" 
                         id="description"
@@ -244,6 +245,7 @@ export default class EditAnime extends Component<{adminToken: any, toggleEditFun
                         />
                     </div>
                     <div className="Episodes">
+                    <label htmlFor="episodes">Episodes</label>
                         <input type="number" 
                         name="episodes" 
                         id="episodes"
@@ -251,10 +253,12 @@ export default class EditAnime extends Component<{adminToken: any, toggleEditFun
                         placeholder="Episodes(12)"
                         onChange={this.setEpisodes}
                         value={this.state.episodes}
+                        pattern="/[^0-9.]/"
                         required
                         />
                     </div>
                     <div className="Studios">
+                    <label htmlFor="studios">Studios</label>
                         <input type="text" 
                         name="studios" 
                         id="studios"
@@ -266,6 +270,7 @@ export default class EditAnime extends Component<{adminToken: any, toggleEditFun
                         />
                     </div>
                     <div className="Genres">
+                    <label htmlFor="genres">Genres</label>
                         <input type="text" 
                         name="genres" 
                         id="genres"
@@ -277,6 +282,7 @@ export default class EditAnime extends Component<{adminToken: any, toggleEditFun
                         />
                     </div>
                     <div className="Duration">
+                    <label htmlFor="duration">Duration</label>
                         <input type="text" 
                         name="duration" 
                         id="duration"
@@ -284,11 +290,11 @@ export default class EditAnime extends Component<{adminToken: any, toggleEditFun
                         placeholder="duration(23 min. per ep.)"
                         onChange={this.setDuration}
                         value={this.state.duration}
-                        pattern="/[^0-9.]/"
                         required
                         />
                     </div>
                     <div className="Rating">
+                    <label htmlFor="rating">Rating</label>
                         <input type="text" 
                         name="rating" 
                         id="rating"
@@ -300,6 +306,7 @@ export default class EditAnime extends Component<{adminToken: any, toggleEditFun
                         />
                     </div>
                     <div className="Poster">
+                    <label htmlFor="img">Poster</label>
                         <input type="text" 
                         name="img" 
                         id="img"
@@ -311,6 +318,7 @@ export default class EditAnime extends Component<{adminToken: any, toggleEditFun
                         />
                     </div>
                     <div className="Screensaver">
+                    <label htmlFor="youTubeImg">Screensaver</label>
                         <input type="text" 
                         name="youTubeImg" 
                         id="youTubeImg"
@@ -322,6 +330,7 @@ export default class EditAnime extends Component<{adminToken: any, toggleEditFun
                         />
                     </div>
                     <div className="YouTube-URL">
+                    <label htmlFor="youTubeVideo">YouTube URL</label>
                         <input type="text" 
                         name="youTubeVideo" 
                         id="youTubeVideo"
@@ -335,7 +344,7 @@ export default class EditAnime extends Component<{adminToken: any, toggleEditFun
                     </div>
                     <div className="edit-btn-container">
                     <button type="submit" className="edit-btn">Submit</button>
-                </div>
+                    </div>
             </Form>
             </Modal.Body>
         </Modal>
