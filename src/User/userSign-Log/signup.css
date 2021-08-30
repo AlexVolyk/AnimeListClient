@@ -1,25 +1,28 @@
-.sign-log{
+.INTEREST{
+    padding: 18.5vh
+}
+.signup-inner{
     width: 400px;
     margin: 0 auto;
-    margin-top: 25vh;
+    /* margin-top: 25vh; */
     padding: 20px;
     text-align: center;
     background-color: cornflowerblue;
 }
 
-form{
+.signup-inner > form{
     margin: 0 auto;
     display: inline-grid;
 }
 
-input {
+.signup-inner > form > input {
     margin-bottom: 10px !important;
     padding: 6px;
     border-radius: 10px;
     outline: none;
 }
-.btn-signup-log {
-    margin-bottom: 10px;
+.signup-inner-btn {
+    margin-bottom: 10px  !important;
     padding: 6px;
     border-radius: 10px;
     outline: none;

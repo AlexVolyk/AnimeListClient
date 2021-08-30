@@ -1,13 +1,16 @@
 import {Modal, Form} from 'react-bootstrap';
 import React, {Component} from "react";
 import sweetalert2 from 'sweetalert2'
-import './sign-log.css'
+// import { useHistory } from "react-router-dom";
+import './login.css'
 import {
     BrowserRouter as Router,
     Switch,
     Route,
     NavLink,
+    Redirect
     } from "react-router-dom";
+    
 // import dog from '../../img/dog.jpg'
 // C:\Users\ACER\Desktop\pr\client\src\img\dog.jpg
 // import dog from '../../img/dog.jpg'
@@ -17,18 +20,19 @@ type parent = {
     userShowLogin: boolean, 
     gut: any, 
     gun: any, 
-    guia: any
+    guia: any,
+    gui: any
 }
 type child = {
     username: string,
     email: string,
     password: string,
     // userToken: string,
-    userId: number
+    // userId: number
     // login: object
 }
 
-export default class Mod extends Component<parent,child> {
+export default class Login extends Component<parent,child> {
     constructor(props:any){
         super(props)
         
@@ -37,14 +41,14 @@ export default class Mod extends Component<parent,child> {
             password: 'kozaklyho',
             // userToken: '',
             username: '',
-            userId: 0,
+            // userId: 0,
         }
         this.setEmail = this.setEmail.bind(this);
         this.setPassword = this.setPassword.bind(this);
         // this.setUserToken = this.setUserToken.bind(this);
         this.setUsername = this.setUsername.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.setUserId = this.setUserId.bind(this);
+        // this.setUserId = this.setUserId.bind(this);
         this.closeModal = this.closeModal.bind(this);
     }
 
@@ -76,12 +80,12 @@ export default class Mod extends Component<parent,child> {
     //     console.log(this.state.userToken)
     // }
 
-    setUserId(e: any ) {
-        this.setState({
-            userId: e
-        })
-        console.log(this.state.userId)
-    }
+    // setUserId(e: any ) {
+    //     this.setState({
+    //         userId: e
+    //     })
+    //     console.log(this.state.userId)
+    // }
 
     closeModal() {
         this.props.showLoginFunction()
@@ -117,7 +121,7 @@ export default class Mod extends Component<parent,child> {
                         showConfirmButton:false,
                     })
                     console.log(json)
-                    this.setUserId(json.user.id)
+                    this.props.gui(json.user.id)
                     this.setUsername(json.user.username)
                     // this.setUserToken(json.userSessionToken)
                     this.props.gut(json.userSessionToken)
@@ -125,6 +129,15 @@ export default class Mod extends Component<parent,child> {
                     this.props.guia(json.user.isAdmin)
 
                     this.closeModal()
+                    window.history.pushState("/", "/", "/");
+                        // {<Redirect push to="/"/>}
+
+                    // <Router>
+                    //     <Route>
+                    //         <Redirect from='login' to="/"/>
+                    //     </Route>
+                    // </Router>
+                    // useHistory().push('/')
                     // setTimeout(() => {
                     //     window.location.assign('/');
                     // },1900)
@@ -159,7 +172,7 @@ export default class Mod extends Component<parent,child> {
             <Modal.Header closeButton>
                 <Modal.Title id='ModalHeader' onClick={this.closeModal}>Login</Modal.Title>
             </Modal.Header>
-            <Modal.Body style={{margin: "0 auto"}}>
+            <Modal.Body style={{margin: "0 auto"}} className="login-inner">
             <Form onSubmit={this.handleSubmit}>
                         <input type="email"
                         id="email"
@@ -173,7 +186,7 @@ export default class Mod extends Component<parent,child> {
                         onChange={this.setPassword}
                         value={this.state.password}
                         />
-                        <button className="btn-signup-log" type="submit">Submit</button>
+                        <button className="login-inner-btn" type="submit">Submit</button>
                     </Form>
             </Modal.Body>
         </Modal >

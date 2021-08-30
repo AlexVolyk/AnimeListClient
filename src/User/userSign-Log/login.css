@@ -1,0 +1,18 @@
+.login-inner > form{
+    /* margin: 0 auto !important; */
+    /* display: inline-grid !important; */
+}
+
+.login-inner> form > input {
+    margin-bottom: 10px !important;
+    padding: 6px;
+    border-radius: 10px;
+    outline: none;
+}
+
+.login-inner-btn {
+    margin-bottom: 10px !important;
+    padding: 6px;
+    border-radius: 10px;
+    outline: none;
+}

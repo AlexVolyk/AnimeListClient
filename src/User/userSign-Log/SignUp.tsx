@@ -1,26 +1,31 @@
 import React, {Component} from "react";
 import sweetalert2 from "sweetalert2"
-import './sign-log.css'
-
+import './signup.css'
+type props = {
+    gui: any,
+    gut: any,
+    gun: any,
+    guia: any
+}
 type info = {
     username: string,
     email: string,
     password: string,
-    userToken: string
+    // userToken: string
 }
 
-export default class SignUp extends Component<{},info> {
+export default class SignUp extends Component<props, info> {
     constructor(props: any){
         super(props)
         this.state = {
             username: '',
             email: '',
             password: '' ,
-            userToken: ''
+            // userToken: ''
         }
         this.setEmail = this.setEmail.bind(this);
         this.setPassword = this.setPassword.bind(this);
-        this.setUserToken = this.setUserToken.bind(this);
+        // this.setUserToken = this.setUserToken.bind(this);
         this.setUsername = this.setUsername.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);  // !
     }
@@ -45,12 +50,12 @@ export default class SignUp extends Component<{},info> {
         console.log(this.state.password)
     }
 
-    setUserToken(e: any ){
-        this.setState({
-            userToken: e
-        })
-        console.log(this.state.userToken)
-    }
+    // setUserToken(e: any ){
+    //     this.setState({
+    //         userToken: e
+    //     })
+    //     console.log(this.state.userToken)
+    // }
 
     async handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         // window.location.assign('login');
@@ -81,8 +86,12 @@ export default class SignUp extends Component<{},info> {
                         timer: 2000,
                         icon: 'success'
                     })
-                    this.setUsername(json.user.username)
-                    this.setUserToken(json.userSessionToken)    
+                    this.props.gui(json.user.id)
+                    // this.setUsername(json.user.username)
+                    // this.setUserToken(json.userSessionToken)
+                    this.props.gut(json.userSessionToken)
+                    this.props.gun(json.user.username)
+                    this.props.guia(json.user.isAdmin)    
                 } else {
                     sweetalert2.fire({
                         position: 'center',
@@ -95,7 +104,8 @@ export default class SignUp extends Component<{},info> {
     }
     render(){
         return(
-            <div className="sign-log">
+            <div className="INTEREST">
+            <div className="signup-inner">
                 <h1>SIgnUp</h1>
                 <form onSubmit={this.handleSubmit}>
                     <input type="text"
@@ -116,8 +126,9 @@ export default class SignUp extends Component<{},info> {
                     onChange={this.setPassword}
                     value={this.state.password}
                     />
-                    <button className="btn-signup-log" type="submit">Submit</button>
+                    <button className="signup-inner-btn" type="submit">Submit</button>
                 </form>
+            </div>
             </div>
         )
     }

@@ -1,0 +1,24 @@
+.navbar-toggler{
+    background-color: blueviolet;
+}
+
+.navbar-toggler:focus{
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.navbar-collapse{
+    position: absolute;
+}
+
+.nav-item{
+    background-color: #fff;
+}
+
+.menu{
+    /* right: 0; */
+}
+.menu-inner{
+    display: flex;
+    justify-content: flex-end;
+}

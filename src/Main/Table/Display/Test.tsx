@@ -1,13 +1,12 @@
 import React, {Component} from "react";
 
-export default class DeleteAnime extends Component{
+export default class Test extends Component<{k:number}>{
     constructor(props: any){
         super(props)
-        this.state = {
-            smt: ""
-        }
     }
+    
     render(){
+        console.log(this.props.k)
         return(
             <>
             </>

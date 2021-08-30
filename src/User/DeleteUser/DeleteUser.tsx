@@ -1,7 +1,10 @@
 import React, {Component} from "react";
-import sweetalert2 from "sweetalert2";
-import './sign-log.css'
-
+import sweetalert2 from "sweetalert2"
+// import './signup.css'
+type props = {
+    userToken: any,
+    userId: any
+}
 type info = {
     username: string,
     email: string,
@@ -9,14 +12,14 @@ type info = {
     userToken: string
 }
 
-export default class Login extends Component<{},info> {
+export default class DeleteUser extends Component<props, info> {
     constructor(props: any){
         super(props)
         this.state = {
-            email: 'kozaklyho@gmail.com',
-            password: 'kozaklyho',
-            userToken: '',
-            username: ''
+            username: '',
+            email: '',
+            password: '' ,
+            userToken: ''
         }
         this.setEmail = this.setEmail.bind(this);
         this.setPassword = this.setPassword.bind(this);
@@ -24,10 +27,9 @@ export default class Login extends Component<{},info> {
         this.setUsername = this.setUsername.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);  // !
     }
-
-    setUsername(value: string){
+    setUsername(e: React.ChangeEvent<HTMLInputElement>){
         this.setState({
-            username: value
+            username: e.target.value
         })
         console.log(this.state.username)
     }
@@ -53,20 +55,22 @@ export default class Login extends Component<{},info> {
         console.log(this.state.userToken)
     }
 
-    handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        // window.location.assign('login');
+    async handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        const URL = 'http://localhost:3000/user/login';
+        const ID = this.props.userId 
+        const URL = `http://localhost:3000/user/delete/user/${ID}`;
         fetch(URL, {
-            method: "POST",
+            method: "PUT",
             body: JSON.stringify({
                 user: {
+                    username: this.state.username,
                     email: this.state.email,
                     password: this.state.password
                 }
             }),
             headers: new Headers({
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `I_AM_USER ${this.props.userToken}`
             })
 
         })
@@ -80,9 +84,8 @@ export default class Login extends Component<{},info> {
                         timer: 2000,
                         icon: 'success'
                     })
-
-                    this.setUsername(json.user.username)
-                    this.setUserToken(json.userSessionToken)    
+                    // this.setUsername(json.user.username)
+                    // this.setUserToken(json.userSessionToken)    
                 } else {
                     sweetalert2.fire({
                         position: 'center',
@@ -90,15 +93,21 @@ export default class Login extends Component<{},info> {
                         timer: 2000,
                         icon: 'error'
                     })
-
                 }
             }) 
     }
     render(){
         return(
-            <div className="sign-log">
-                <h1>Login</h1>
+            <div className="INTEREST">
+            <div className="signup-inner">
+                <h1>Delete</h1>
                 <form onSubmit={this.handleSubmit}>
+                    <input type="text"
+                    id="username"
+                    placeholder="username"
+                    onChange={this.setUsername}
+                    value={this.state.username}
+                    />
                     <input type="email"
                     id="email"
                     placeholder="email"
@@ -111,8 +120,9 @@ export default class Login extends Component<{},info> {
                     onChange={this.setPassword}
                     value={this.state.password}
                     />
-                    <button className="btn-signup-log" type="submit">Submit</button>
+                    <button className="signup-inner-btn" type="submit">Submit</button>
                 </form>
+            </div>
             </div>
         )
     }

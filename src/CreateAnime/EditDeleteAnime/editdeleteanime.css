@@ -1,0 +1,45 @@
+.search-inner{
+    position: relative;
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 25vh;
+}
+
+.search-input{
+    position: absolute;
+    width: inherit;
+    padding-left: 45px;
+}
+
+.search-input:focus{
+    background-color: rgb(228, 228, 228);
+    transition: 0.3s;
+    transition-property: background-color;
+}
+
+.search-btn{
+    z-index: 99;
+    position: absolute;
+    padding-top: 0px;
+    margin-top: 6px;
+    margin-left: 8px;
+    border: none;
+    border-radius: 50%;
+    background-color: white;
+    transition: 0.3s;
+    transition-property: background-color;
+}
+
+.search-btn:hover{
+    /* background-color:rgb(161, 153, 153); */
+    background-color: black;
+    transition: 0.3s;
+    transition-property: background-color;
+}
+
+.search-btn:focus{
+    /* background-color:rgb(161, 153, 153); */
+    background-color: rgb(228, 228, 228);
+    transition: 0.3s;
+    transition-property: background-color;
+}

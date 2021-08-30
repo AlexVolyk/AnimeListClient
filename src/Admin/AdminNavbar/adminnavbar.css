@@ -1,19 +1,25 @@
 .admin-navbar{
     position: fixed;
+    z-index: 999;
 }
 .admin-navbar ul{
-    list-style: none;
+
     padding-left: 0;
+    background-color: mediumslateblue;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .admin-navbar ul > li{
-    background-color: mediumslateblue;
+    border-top-right-radius: inherit;
+    border-bottom-right-radius: inherit;
+    /* background-color: mediumslateblue; */
     transition: 0.3s;
     transition-property: background-color;
 }
 
 .admin-navbar ul > li:hover{
-    background-color: rgb(140, 124, 233);
+    /* background-color: rgb(140, 124, 233); */
     transition: 0.3s;
     transition-property: background-color;
 }

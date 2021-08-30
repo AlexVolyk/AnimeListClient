@@ -1,7 +1,9 @@
 import React, {Component} from "react";
-import { Form } from "react-bootstrap";
 import sweetalert2 from "sweetalert2";
-import './createanime.css'
+import {Modal, Form} from 'react-bootstrap';
+import './editanime.css'
+
+
 
 type types = {
     title_name: string,
@@ -15,27 +17,25 @@ type types = {
     img: string,
     youTubeImg: string,
     youTubeVideo: string,
-    parsUrl: string
 }
 
-export default class CreateAnime extends Component<{adminToken: string},types>{
+export default class EditAnime extends Component<{adminToken: any, toggleEditFunction: any, getFind: any}, types>{
     constructor(props: any){
         super(props)
+        const editObj = this.props.getFind[0]
         this.state = {
-            title_name: "",
-            title_english: "",
-            description: "",
-            episodes: 0,
-            studios: "",
-            genres: "",
-            duration: "",
-            rating: "",
-            img: "",
-            youTubeImg: "",
-            youTubeVideo: "",
-            parsUrl: ""
+            title_name: editObj.title_name,
+            title_english: editObj.title_english,
+            description: editObj.description,
+            episodes: editObj.episodes,
+            studios: editObj.studios,
+            genres: editObj.genres,
+            duration: editObj.duration,
+            rating: editObj.rating,
+            img: editObj.img,
+            youTubeImg: editObj.youTubeImg,
+            youTubeVideo: editObj.youTubeVideo,
         }
-
         this.setTitleName = this.setTitleName.bind(this);
         this.setTitleEnglish = this.setTitleEnglish.bind(this);
         this.setDescription = this.setDescription.bind(this);
@@ -48,10 +48,9 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
         this.setYouTubeImg = this.setYouTubeImg.bind(this);
         this.setYouTubeVideo = this.setYouTubeVideo.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.setParsUrl = this.setParsUrl.bind(this);
-        this.parserFunction = this.parserFunction.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
-
+    
     setTitleName(e: React.ChangeEvent<HTMLInputElement>){
         this.setState({
             title_name: e.target.value
@@ -129,93 +128,19 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
         console.log(this.state.youTubeVideo)
     }
 
-    setParsUrl(e: React.ChangeEvent<HTMLInputElement>) {
-        this.setState({
-            parsUrl: e.target.value
-        })
-        console.log(this.state.parsUrl)
+    closeModal() {
+        this.props.toggleEditFunction()
     }
-    //! PARSE ANIME
-    async parserFunction() {
-        const URL = "http://localhost:3000/anime/pars";
-        fetch(URL, {
-            method: "POST",
-            body: JSON.stringify({
-                pars: {
-                    parsUrl: this.state.parsUrl
-                }
-            }),
-            headers: new Headers({
-                "Content-Type": "application/json",
-                "Authorization": `I_AM_ADMIN ${this.props.adminToken}`
-            }),
-        })
-        .then(res => res.json())
-        .then(json => {
-            console.log(json)
 
-            console.log(json.message)
-            const Toast = sweetalert2.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                })
-            if (json.parsThis !== undefined){
-                let get = json.parsThis
-                this.setState({
-                    title_name: get.title_name,
-                    title_english: get.title_english,
-                    description: get.description,
-                    episodes: get.episodes,
-                    studios: get.studios,
-                    genres: get.genres,
-                    duration: get.duration,
-                    rating: get.rating,
-                    img: get.img,
-                    youTubeImg: get.youTubeImg,
-                    youTubeVideo: get.youTubeVideo
-                })
 
-                Toast.fire({
-                    icon: 'success',
-                    title: json.message
-                    })
-                
-
-            } else {
-                if(!this.setResetStates){
-                    Toast.fire({
-                        icon: 'error',
-                        title: json.message
-                    })
-                }
-            }
-        })
-}
-
-    setResetStates = () => {
-        this.setState({
-            title_name: "",
-            title_english: "",
-            description: "",
-            episodes: 0,
-            studios: "",
-            genres: "",
-            duration: "",
-            rating: "",
-            img: "",
-            youTubeImg: "",
-            youTubeVideo: ""
-        })
-    }
-    //! CREATE ANIME
-    handleSubmit(e: React.FormEvent<HTMLFormElement>){
+    async handleSubmit(e: React.FormEvent<HTMLFormElement>){
         e.preventDefault()
-        const cURL = "http://localhost:3000/anime/create";
-        fetch(cURL, {
-            method: "POST",
+        const getFindArr = await {...this.props.getFind};
+        const ID = await getFindArr[0].id;
+
+        const URL = `http://localhost:3000/anime/edit/${ID}`;
+        fetch(URL, {
+            method: "PUT",
             body: JSON.stringify({
                 anime: {
                     title_name: this.state.title_name,
@@ -246,39 +171,44 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
                 timer: 3000,
                 timerProgressBar: true,
                 })
-            if (json.anime !== undefined){
+            if (json.update !== undefined){
+
                 Toast.fire({
                     icon: 'success',
                     title: json.message
                     })
                 
-                this.setResetStates()
-
             } else {
-                if(!this.setResetStates){
-                    Toast.fire({
-                        icon: 'error',
-                        title: json.message
-                    })
-                }
+                
+                Toast.fire({
+                    icon: 'error',
+                    title: json.message
+                })
             }
         })
         
     }
 
-    render(){ 
-        return( 
-            <>               
-            <input type="text" 
-            name="parse" 
-            id="parse"
-            // className="width-for-all" 
-            placeholder="Parse URL *MyAnimeList"
-            onChange={this.setParsUrl}
-            value={this.state.parsUrl}
-            />
-            <button className="create-btn" onClick={this.parserFunction}>Parse</button>
-            <Form className=" create-form" onSubmit={this.handleSubmit}>
+
+    render(){
+        // let getFindArr = {...this.props.getFind};
+        // // const ID = await getFindArr[0].id;
+        // let obj = getFindArr[0]
+        // console.log(obj, "obj")
+        return(
+            <>
+        <Modal
+        show={true}
+        // aria-labelledby="contained-modal-title-vcenter"
+        // centered
+        onHide={this.closeModal}
+        fullscreen={true}
+        >
+            <Modal.Header closeButton>
+                <Modal.Title id='ModalHeader' onClick={this.closeModal}>Edit</Modal.Title>
+            </Modal.Header>
+            <Modal.Body style={{margin: "0 auto"}}>
+            <Form className="create-form" onSubmit={this.handleSubmit}>
                 <div className="container">
                     <div className="TItle">
                         <input type="text" 
@@ -321,7 +251,6 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
                         placeholder="Episodes(12)"
                         onChange={this.setEpisodes}
                         value={this.state.episodes}
-                        pattern="/[^0-9.]/"
                         required
                         />
                     </div>
@@ -355,6 +284,7 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
                         placeholder="duration(23 min. per ep.)"
                         onChange={this.setDuration}
                         value={this.state.duration}
+                        pattern="/[^0-9.]/"
                         required
                         />
                     </div>
@@ -403,11 +333,12 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
                         />
                     </div>
                     </div>
-                    <div className="create-btn-container">
-                    <button className="create-btn" onClick={this.setResetStates}>Reset Fields</button>
-                    <button type="submit" className="create-btn">Submit</button>
+                    <div className="edit-btn-container">
+                    <button type="submit" className="edit-btn">Submit</button>
                 </div>
             </Form>
+            </Modal.Body>
+        </Modal>
             </>
         )
     }

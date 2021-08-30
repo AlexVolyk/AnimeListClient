@@ -1,12 +1,12 @@
 import React, {Component} from "react";
-import Display from "./Display/Display";
+import DisplayAct from "./Display/Display";
 import './table.css'
 
 type tp = {
     smt: Array<Object>,
     genre: any
 }
-export default class Table extends Component<{},tp>{
+export default class TableAct extends Component<{action: any},tp>{
     constructor(props: any){
         super(props)
         this.state = {
@@ -35,22 +35,24 @@ export default class Table extends Component<{},tp>{
                 this.setAnimes(json)
             })
     }
+    // componentWillMount(){
+    //     this.getAnimes()
+    //     console.log("componentWillMount")
+    //     console.log(this.props, "++++++++++++++++++")
+    // }
 
-    componentDidMount(){
-        this.getAnimes()
-        console.log("componentWillMount")
-        console.log(this.props, "++++++++++++++++++")
+
+    componentWillUnmount(){
+        if(window.location.pathname == '/genres/action') this.setState({genre: "Action"})
     }
 
-
-
     render(){
-        
-
-
+        console.log(this.state.genre, "++++++++++++++++++")
+        // if(window.location.pathname == '/genre/action') this.setState({genre: "Action"})
+        console.log(window.location.pathname, "++++++++++++++++++")
         return(
             <div className="display-table">
-                <Display {...this.state}/>
+                <DisplayAct {...this.state} {...this.props}/>
             </div>
         )
     }

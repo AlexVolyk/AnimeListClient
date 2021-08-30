@@ -1,37 +1,31 @@
 import React, {Component} from "react";
-import {Modal, Form} from 'react-bootstrap';
 import sweetalert2 from "sweetalert2"
-import './adminlogin.css';
-
-type parent = {
-    adminShowLoginFunction: any,
-    adminShowLogin: boolean,
-    gat: any,
-    gaia: any
+// import './signup.css'
+type props = {
+    userToken: any,
+    userId: any
 }
-
 type info = {
     username: string,
     email: string,
     password: string,
-    adminToken: string
+    // userToken: string
 }
 
-export default class SignUp extends Component<parent, info> {
+export default class EditUser extends Component<props, info> {
     constructor(props: any){
         super(props)
         this.state = {
-            username: 'kozaklyho',
-            email: 'kozaklyho@gmail.com',
-            password: 'kozaklyho' ,
-            adminToken: ''
+            username: '',
+            email: '',
+            password: '' ,
+            // userToken: ''
         }
         this.setEmail = this.setEmail.bind(this);
         this.setPassword = this.setPassword.bind(this);
-        this.setAdminToken = this.setAdminToken.bind(this);
+        // this.setUserToken = this.setUserToken.bind(this);
         this.setUsername = this.setUsername.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);  // !
-        this.closeModal = this.closeModal.bind(this);
     }
     setUsername(e: React.ChangeEvent<HTMLInputElement>){
         this.setState({
@@ -54,78 +48,60 @@ export default class SignUp extends Component<parent, info> {
         console.log(this.state.password)
     }
 
-    setAdminToken(e: string ){
-        this.setState({
-            adminToken: e
-        })
-        console.log(this.state.adminToken)
-    }
+    // setUserToken(e: any ){
+    //     this.setState({
+    //         userToken: e
+    //     })
+    //     console.log(this.state.userToken)
+    // }
 
-    closeModal() {
-        this.props.adminShowLoginFunction()
-        // window.location.assign('/')
-    }
-
-    handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    async handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-
-        const URL = 'http://localhost:3000/admin/login';
+        const ID = this.props.userId
+        const URL = `http://localhost:3000/user/edit/user/${ID}`;
         fetch(URL, {
-            method: "POST",
+            method: "DELETE",
             body: JSON.stringify({
-                admin: {
+                user: {
                     username: this.state.username,
                     email: this.state.email,
                     password: this.state.password
                 }
             }),
             headers: new Headers({
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `I_AM_USER ${this.props.userToken}`
             })
 
         })
             .then(res => res.json())
             .then(json => {
-                // console.log(json)
-                if (json.admin !== undefined){
+                console.log(json)
+                if (json.user !== undefined){
                     sweetalert2.fire({
                         position: 'center',
                         title: json.message,
                         timer: 2000,
-                        icon: 'success',
-                        showConfirmButton:false,
+                        icon: 'success'
                     })
-                    // this.setUsername(json.admin.username)
-                    this.props.gat(json.adminSessionToken)  
-                    this.props.gaia(json.admin.isAdmin) 
-                    console.log(json) 
-                    this.closeModal()
+                    // this.setUsername(json.user.username)
+                    // this.setUserToken(json.userSessionToken)    
                 } else {
                     sweetalert2.fire({
                         position: 'center',
                         title: json.message,
                         timer: 2000,
-                        icon: 'error',
-                        showConfirmButton:false,
+                        icon: 'error'
                     })
                 }
-            })
+            }) 
     }
     render(){
         return(
-            <>
-        <Modal
-        show={true}
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-        onHide={this.closeModal}
-        >
-            <Modal.Header closeButton>
-                <Modal.Title id='ModalHeader' onClick={this.closeModal}>Admin Login</Modal.Title>
-            </Modal.Header>
-            <Modal.Body className="modal-admlogin">
-            {/* <div className="sign-log"> */}
-                <Form onSubmit={this.handleSubmit}className="login-inner">
+            <div className="INTEREST">
+            <div className="signup-inner">
+                <h1>Edit</h1>
+                <form onSubmit={this.handleSubmit}>
                     <input type="text"
                     id="username"
                     placeholder="username"
@@ -144,11 +120,10 @@ export default class SignUp extends Component<parent, info> {
                     onChange={this.setPassword}
                     value={this.state.password}
                     />
-                    <button type="submit" className="login-inner-btn">Submit</button>
-                    </Form>
-            </Modal.Body>
-        </Modal >
-        </>
+                    <button className="signup-inner-btn" type="submit">Submit</button>
+                </form>
+            </div>
+            </div>
         )
     }
 

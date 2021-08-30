@@ -1,0 +1,69 @@
+.anime-find{
+    /* padding-top: 40px; */
+}
+.anime-find-img{
+    width: 100%;
+    display: block;
+    vertical-align: top;
+}
+
+.find-anime-adm{
+    position: absolute;
+    top: 50px;
+    left: -120%;
+    font-size: 14px;
+}
+
+.common{
+    min-width: 60px !important;
+    vertical-align: top;
+    border: 1px solid black !important;
+    min-height: 300px;
+    word-wrap: break-word;
+}
+
+.specific{
+    vertical-align: top;
+    border: 1px solid black !important;
+    max-width: 152px !important;
+    min-width: 142px !important;
+    max-height: 200px !important;
+    min-height: 199px !important;
+    overflow-y: auto;
+    word-wrap: break-word;
+}
+
+.specific-description{
+    min-width: 200px !important;
+}
+
+td{
+    padding: 2px;
+}
+
+.action-btn-inner{
+    display: flex;
+    margin-left: 540px;
+}
+
+.action-btn{
+    border: none;
+    border-radius: 10px;
+    background-color: lavender;
+    transition: 0.3s;
+    transition-property: background-color;
+}
+
+.action-btn:last-child{
+    margin-left: 20px;
+}
+
+.action-btn:hover{
+    background-color: rgb(166, 166, 253);
+    transition: 0.3s;
+    transition-property: background-color;
+}
+
+.table-rows{
+    /* border: 1px solid blue !important; */
+}

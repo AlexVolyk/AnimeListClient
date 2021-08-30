@@ -1,21 +1,19 @@
 import React, {Component} from "react";
-// import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
 import './display.css'
+import Test from './Test'
 
-// interface IRecipeProps {
-//     // ingredients?: string[];
-//     title?: string,
-//     img?: string,
-//     // instructions?: string;
-//   }
-type prop = {
-    smt: any
+
+type props = {
+    smt: any,
 }
 type t = {
-    sss: any
+    sss: any,
+}
+type a = {
+    k:any
 }
 
-export default class Display extends Component<prop, t>{
+export default class Display extends Component<props, t, a>{
     constructor(props: any){
         super(props)
         this.state = {
@@ -23,38 +21,40 @@ export default class Display extends Component<prop, t>{
         }
         // this.show = this.show.bind(this)
     }
-    // show(){
-    //     let animes1: any = this.props
-    //     // console.log(animes1)
-    //     let i:number = 0
-    //     // console.log(animes1[i])
-    //     let animes: any = animes1[i]
-    //     console.log(animes, "CHILD")
-    // }
+
+    componentDidMount(){
+        let getLoc = window.location.pathname
+        let genr = getLoc.replace('/genre/', '')
+        console.log(genr, "ganr")
+        this.setState({sss: genr})
+    }
 
     render(){
-        // let animes1: any = this.props.smt
-        // // console.log(animes1)
-        // let i:number = 0
-        // // console.log(animes1[i])
-        // let animes: any = animes1[i]
-        // console.log(animes, "CHILD")
-        // // console.log(animes[i].id, "CHILD")
-        // for (let j = 0; j < animes.length; j++) {
-        //     console.log(animes[j]);
-        // }
-        let animes = this.props.smt
-        // console.log(a)
-        let a = "WTF";
-        // for (let j = 0; j < a.length; j++) {
-        //     console.log(a[j]);
-        // }
-        // console.log(this.props.smt[0])
+        var animes
+        if(this.state.sss !== '/') {
+            let filtered = this.props.smt.filter((anime: any) => {
+                let genre = anime.genres.toLowerCase()
+                let animeArr = genre.includes(this.state.sss)
+                return animeArr
+            })
+            animes = filtered
+            console.log(animes)
+
+        } else  {
+            animes = this.props.smt
+            console.log(animes)
+        }
+
+        // console.log(filtered, "HERE")
+        // let animes = filtered
+        // console.log(animes)
+
         return(
+            
         //     <div className="card-container">
         //     <img src='https://cdn.myanimelist.net/images/anime/1811/115541.jpg' alt="" />
         //     <div className="info">
-        //         <p>Vanitas no Karte</p>
+        //         <p>Vanitas no Karte {this.state.sss}</p>
         //         <p>The Case Study of Vanitas</p>
         //         <p>12</p>
         //         <p>23 min. per ep.</p>
@@ -63,16 +63,11 @@ export default class Display extends Component<prop, t>{
         //         <p>R - 17+ (violence & profanity)</p>
         //     </div> 
         // </div>
-            // <div></div>
-            // <div>{animes.title_name}</div>
-            // animes.map((anime: any) => {
-            //     <p>{anime}</p>
-            //     console.log(anime)
-            // })
             <>
-            {this.props.smt.map((anime: any) => {
+            {animes.length !== 0 && animes[0] !== null ? (
+                animes.map((anime: any, key: number) => {
                 return(
-                <div className="card-container">
+                <div className="card-container" key={key}>
                 <img src={anime.img} alt="" />
                 <div className="info">
                     <p>{anime.title_name}</p>
@@ -83,23 +78,15 @@ export default class Display extends Component<prop, t>{
                     <p>{anime.description}</p>
                     <p>{anime.rating}</p>
                 </div>
+                {/* <Test k={key}/> */}
             </div>
             // console.log(anime)
-            )})}
+            )})
+            ) : (
+                <div>NOT FOUND</div>
+                )
+                }
             </>
-            // <div className="card-container">
-            //     <p>{animes.rating}</p>
-            //     <img src={animes.img} alt="" />
-            //     <div className="info">
-            //         <p>{animes.title_name}</p>
-            //         <p>{animes.title_english}</p>
-            //         <p>{animes.episodes}</p>
-            //         <p>{animes.duration}</p>
-            //         <p>{animes.rating}</p>
-            //         <p>{animes.description}</p>
-            //         <p>{animes.rating}</p>
-            //     </div> 
-            // </div>
         )
     }
 }
