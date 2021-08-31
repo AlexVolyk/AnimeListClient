@@ -2,12 +2,14 @@ import React, {Component} from "react";
 import sweetalert2 from "sweetalert2"
 import {AiFillEye, AiFillEyeInvisible} from 'react-icons/ai'
 import './signup.css'
+
 type props = {
-    gui: any,
-    gut: any,
-    gun: any,
-    guia: any
+    gui: Function,
+    gut: Function,
+    gun: Function,
+    guia: Function
 }
+
 type info = {
     username: string,
     email: string,
@@ -22,53 +24,44 @@ export default class SignUp extends Component<props, info> {
             username: '',
             email: '',
             password: '' ,
-            // userToken: ''
             showPasswordBoolean: false,
         }
         this.setEmail = this.setEmail.bind(this);
         this.setPassword = this.setPassword.bind(this);
-        // this.setUserToken = this.setUserToken.bind(this);
         this.setUsername = this.setUsername.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);  // !
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.showPasswordToggle = this.showPasswordToggle.bind(this)
     }
-    showPasswordToggle () {
+    showPasswordToggle (): void {
         this.setState({
             showPasswordBoolean: !this.state.showPasswordBoolean
         })
-        console.log(this.state.showPasswordBoolean)
+        // console.log(this.state.showPasswordBoolean)
     }
 
-    setUsername(e: React.ChangeEvent<HTMLInputElement>){
+    setUsername(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             username: e.target.value
         })
-        console.log(this.state.username)
+        // console.log(this.state.username)
     }
 
-    setEmail(e: React.ChangeEvent<HTMLInputElement>){
+    setEmail(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             email: e.target.value
         })
-        console.log(this.state.email)
+        // console.log(this.state.email)
     }
 
-    setPassword(e: React.ChangeEvent<HTMLInputElement>){
+    setPassword(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             password: e.target.value
         })
-        console.log(this.state.password)
+        // console.log(this.state.password)
     }
 
-    // setUserToken(e: any ){
-    //     this.setState({
-    //         userToken: e
-    //     })
-    //     console.log(this.state.userToken)
-    // }
 
     async handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        // window.location.assign('login');
         e.preventDefault()
 
         const URL = 'http://localhost:3000/user/register';
@@ -88,7 +81,7 @@ export default class SignUp extends Component<props, info> {
         })
             .then(res => res.json())
             .then(json => {
-                console.log(json)
+                // console.log(json)
                 if (json.user !== undefined){
                     sweetalert2.fire({
                         position: 'center',
@@ -145,12 +138,12 @@ export default class SignUp extends Component<props, info> {
                         required
                         />
                         {this.state.showPasswordBoolean ? (
-                        <button className="show-password-btn" onClick={this.showPasswordToggle}><AiFillEye /></button>
+                        <button type="button" className="show-password-btn" onClick={this.showPasswordToggle}><AiFillEye /></button>
                             ) : (
-                        <button className="show-password-btn" onClick={this.showPasswordToggle}><AiFillEyeInvisible /></button>
+                        <button type="button" className="show-password-btn" onClick={this.showPasswordToggle}><AiFillEyeInvisible /></button>
                         )}
                     </div>
-                    <button className="signup-inner-btn" type="submit">Submit</button>
+                    <button className="forms-user-btn" type="submit">Submit</button>
                 </form>
             </div>
             </div>

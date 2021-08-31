@@ -1,16 +1,10 @@
 import React, {Component} from "react";
 import sweetalert2 from "sweetalert2";
-// import {
-//     BrowserRouter as Router,
-//     Switch,
-//     Route,
-//     NavLink,
-//     Redirect,
-//     useHistory
-//     } from "react-router-dom";
+
 type props = {
-    userToken: any,
-    userId: any
+    userToken: string,
+    userId: string,
+    lou: Function
 }
 type info = {
 
@@ -25,8 +19,9 @@ export default class DeleteUser extends Component<props, info> {
 
     }
 
-    delete = (ID:any) => {
-        console.log(ID)
+    //! DELETE FETCH
+    delete = (ID:any): void => {
+        // console.log(ID)
         const URL = `http://localhost:3000/user/delete/user/${ID}`;
         fetch(URL, {
             method: "DELETE",
@@ -38,27 +33,12 @@ export default class DeleteUser extends Component<props, info> {
         })
             .then(res => res.json())
             .then(json => {
-                console.log(json, "json")
-                if (json.message === "User successfully deleted"){
-                    sweetalert2.fire({
-                        position: 'center',
-                        title: json.message,
-                        timer: 2000,
-                        icon: 'success'
-                    })
-
-                } else {
-                    sweetalert2.fire({
-                        position: 'center',
-                        title: json.message,
-                        timer: 2000,
-                        icon: 'error'
-                    })
-                }
+                // console.log(json, "json")
             }) 
     }
     render(){
 
+        //! Clarify deletion
     const swalWithBootstrapButtons = sweetalert2.mixin({
         customClass: {
             confirmButton: 'btn btn-success',
@@ -78,13 +58,14 @@ export default class DeleteUser extends Component<props, info> {
     }).then((result) => {
         if (result.isConfirmed) {
             this.delete(this.props.userId)
+            this.props.lou()
+
             swalWithBootstrapButtons.fire(
             'Deleted!',
             'Your Account has been deleted.',
             'success'
             )
     } else if (
-        /* Read more about handling dismissals below */
             result.dismiss === sweetalert2.DismissReason.cancel
     ) {
             swalWithBootstrapButtons.fire(

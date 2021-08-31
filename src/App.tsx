@@ -1,43 +1,53 @@
-import React,{Component} from "react";
+import React, {Component} from "react";
 
 import Header from "./Header/Header";
-// import Mod from "./User/userSign-Log/Login";
-// import Login from './User/userSign-Log/Login'
-import AuthProvider from './Context/AuthContext'
+import sweetalert2 from "sweetalert2";
+
+// import AuthProvider from './Context/AuthContext'
 // import AuthContext from './Context/AuthContext'
 import AdminNavbar from "./Admin/AdminNavbar/AdminNavbar";
 import AdminPanel from "./Admin/AdminPanel/AdminPanel"
 
 import Main from './Main/Main'
 import Footer from "./Footer/Footer";
-// import Navbar from "./Navbar/Navbar";
 
-type t = {
-  userToken: any,
-  userName: string,
-  userIsAdmin: any,
-  gut: any,
-  gun: any,
-  guia: any,
+const logout = sweetalert2.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 3000,
+  timerProgressBar: true,
+  })
 
-
-  adminToken: any,
-  adminIsAdmin: boolean,
-  gat: any,
-  gaia: any,
-  logOutForAdmin: any,
-  logOutBoth:any,
-
-  showAdminPanel: boolean,
-  setShowAdminPanel: any,
-
-  userId: number | string | any,
-  gui: any
-
+type props = {
 
 }
 
-export default class App extends Component<{},t> {
+type info = {
+  userToken: any,
+  userName: string,
+  userIsAdmin: any,
+  gut: Function,
+  gun: Function,
+  guia: Function,
+  lou: Function,
+
+  adminToken: any,
+  adminIsAdmin: boolean,
+  gat: Function,
+  gaia: Function,
+  logOutForAdmin: Function,
+  logOutBoth:Function,
+
+  showAdminPanel: boolean,
+  setShowAdminPanel: Function,
+
+  userId: number | string | null,
+  gui: Function
+
+}
+
+export default class App extends Component<props, info> {
   constructor(props: any){
     super(props)
     this.state = {
@@ -49,6 +59,7 @@ export default class App extends Component<{},t> {
       gun: this.getUserName,
       guia: this.getUserIsAdmin,
       gui: this.getUserId,
+      lou: this.logOutUser,
 
 
       adminToken: '',
@@ -78,7 +89,7 @@ export default class App extends Component<{},t> {
     this.getUserId = this.getUserId.bind(this);
   }
 
-  getUserId = (e: any ) => {
+  getUserId = (e: number ) => {
     this.setState({
         userId: e
     })
@@ -87,20 +98,19 @@ export default class App extends Component<{},t> {
   componentDidMount(){
     if (localStorage.getItem('adminToken')){
       this.setState({adminToken: localStorage.getItem('adminToken')});
-      // this.getAdminToken(localStorage.getItem('adminToken'));
-      console.log("________________________")
+      // console.log("________________________")
     }
     if (localStorage.getItem('userToken')){
       this.setState({userToken: localStorage.getItem('userToken')});
-      console.log(this.state.userToken ,"+++++++++++++++++++++++", "componentDidMount userToken")
+      // console.log(this.state.userToken ,"+++++++++++++++++++++++", "componentDidMount userToken")
     }
     if (localStorage.getItem('userIsAdmin')){
       this.setState({userIsAdmin: localStorage.getItem('userIsAdmin')});
-      console.log(this.state.userIsAdmin ,"+++++++++++++++++++++++", "componentDidMount userIsAdmin")
+      // console.log(this.state.userIsAdmin ,"+++++++++++++++++++++++", "componentDidMount userIsAdmin")
     }
-    if (localStorage.getItem('userId')){
-      this.setState({userId: localStorage.getItem('userId')});
-      console.log(this.state.userId ,"+++++++++++++++++++++++", "componentDidMount userId")
+    if (sessionStorage.getItem('userId')){
+      this.setState({userId: sessionStorage.getItem('userId')});
+      // console.log(this.state.userId ,"+++++++++++++++++++++++", "componentDidMount userId")
     }
   }
 
@@ -110,88 +120,108 @@ export default class App extends Component<{},t> {
   //   console.log(newToken , '-----------');
   // }
 //! USER
-  getUserToken = (e: any ) => {
+  getUserToken = (e: string ) => {
     this.setState({
         userToken: e
     })
     localStorage.setItem('userToken', this.state.userToken);
-    // setSessionToken(userToken);
-    console.log(this.state.userToken, "userToken")
+    // console.log(this.state.userToken, "userToken")
   }
 
-  getUserName = (e: any ) => {
+  getUserName = (e: string ) => {
     this.setState({
       userName: e
     })
-    console.log(this.state.userName, "userName")
+    // console.log(this.state.userName, "userName")
   }
 
-  getUserIsAdmin = (e: any ) => {
+  getUserIsAdmin = (e: boolean ) => {
     this.setState({
       userIsAdmin: e
     })
     localStorage.setItem('userIsAdmin', this.state.userIsAdmin);
-    console.log(this.state.userIsAdmin, "userIsAdmin")
+    // console.log(this.state.userIsAdmin, "userIsAdmin")
   }
 
-  logOutUser = () => {
+  logOutUser = (): void => {
     this.setState({
       userToken: '',
-      userIsAdmin: false
+      userIsAdmin: false,
+      userName: '',
+      userId: '',
+      adminToken: ''
     })
+    
     localStorage.removeItem('userToken')
     localStorage.removeItem('userIsAdmin')
-    console.log(this.state.userIsAdmin, "userIsAdmin")
-    console.log(this.state.userToken, "userToken")
+    // console.log(this.state.userIsAdmin, "userIsAdmin")
+    // console.log(this.state.userToken, "userToken")
+    logout.fire({
+      icon: 'success',
+      title: "User seccessfully logout"
+      })
   }
   
 // ! ADMIN
-  getAdminToken = (e: any ) => {
+  getAdminToken = (e: string ) => {
     this.setState({
       adminToken: e
     })
     localStorage.setItem('adminToken', this.state.adminToken);
-    console.log(this.state.adminToken, "adminToken")
+    // console.log(this.state.adminToken, "adminToken")
   }
 
-  getAdminIsAdmin = (e: any ) => {
+  getAdminIsAdmin = (e: boolean ) => {
     this.setState({
       adminIsAdmin: e
     })
-    console.log(this.state.adminIsAdmin, "adminIsAdmin")
+    // console.log(this.state.adminIsAdmin, "adminIsAdmin")
   }
 
-  logOutAdmin = () => {
+  logOutAdmin = (): void => {
     this.setState({
       adminToken: '',
       adminIsAdmin: false,
-      showAdminPanel: false
+      showAdminPanel: false,
+
     })
     localStorage.removeItem('adminToken')
-    console.log(this.state.adminIsAdmin, "adminIsAdmin")
-    console.log(this.state.adminToken, "adminToken")
+    // console.log(this.state.adminIsAdmin, "adminIsAdmin")
+    // console.log(this.state.adminToken, "adminToken")
+    logout.fire({
+      icon: 'success',
+      title: "Admin seccessfully logout"
+      })
   }
 
-  logOutUserAdmin = () => {
+  logOutUserAdmin = (): void => {
     this.setState({
-      adminToken: '',
       userToken: '',
-      adminIsAdmin: false,
       userIsAdmin: false,
-      showAdminPanel: false
+      userName: '',
+      userId: '',
+      adminToken: '',
+      adminIsAdmin: false,
+      showAdminPanel: false,
     })
     localStorage.clear()
-    console.log(this.state.userToken, "userToken")
-    console.log(this.state.adminToken, "adminToken")
-    console.log(this.state.adminIsAdmin, "adminIsAdmin")
-    console.log(this.state.userIsAdmin, "userIsAdmin")
+
+    // console.log(this.state.userToken, "userToken")
+    // console.log(this.state.adminToken, "adminToken")
+    // console.log(this.state.adminIsAdmin, "adminIsAdmin")
+    // console.log(this.state.userIsAdmin, "userIsAdmin")
+
+    logout.fire({
+      icon: 'success',
+      title: "Admin and User seccessfully logout"
+      })
   }
 
-  setShowAdminPanel = () => {
+  setShowAdminPanel = (): void => {
     this.setState({
       showAdminPanel: !this.state.showAdminPanel
     })
-    console.log(this.state.showAdminPanel, "showAdminPanel")
+    // console.log(this.state.showAdminPanel, "showAdminPanel")
   }
 
   render(){
@@ -201,12 +231,9 @@ export default class App extends Component<{},t> {
         {/* <AuthProvider > */}
           <Header {...this.state} />
           {this.state.adminIsAdmin ? <AdminNavbar {...this.state}/> : null}
-          {/* <AdminNavbar {...this.state} /> */}
-          {/* <Navbar /> */}
           <Main {...this.state}/>
 
           {this.state.showAdminPanel ? <AdminPanel {...this.state}/> : null}
-          {/* <AdminPanel {...this.state}/> */}
           <Footer /> 
         {/* </AuthProvider> */}
       </div>

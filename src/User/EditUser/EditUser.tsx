@@ -1,15 +1,14 @@
 import React, {Component} from "react";
 import sweetalert2 from "sweetalert2"
-// import './signup.css'
+
 type props = {
-    userToken: any,
-    userId: any
+    userToken: string,
+    userId: string
 }
 type info = {
     username: string,
     email: string,
     password: string,
-    // userToken: string
 }
 
 export default class EditUser extends Component<props, info> {
@@ -19,46 +18,38 @@ export default class EditUser extends Component<props, info> {
             username: '',
             email: '',
             password: '' ,
-            // userToken: ''
         }
         this.setEmail = this.setEmail.bind(this);
         this.setPassword = this.setPassword.bind(this);
-        // this.setUserToken = this.setUserToken.bind(this);
         this.setUsername = this.setUsername.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);  // !
     }
-    setUsername(e: React.ChangeEvent<HTMLInputElement>){
+    setUsername(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             username: e.target.value
         })
-        console.log(this.state.username)
+        // console.log(this.state.username)
     }
 
-    setEmail(e: React.ChangeEvent<HTMLInputElement>){
+    setEmail(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             email: e.target.value
         })
-        console.log(this.state.email)
+        // console.log(this.state.email)
     }
 
-    setPassword(e: React.ChangeEvent<HTMLInputElement>){
+    setPassword(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             password: e.target.value
         })
-        console.log(this.state.password)
+        // console.log(this.state.password)
     }
 
-    // setUserToken(e: any ){
-    //     this.setState({
-    //         userToken: e
-    //     })
-    //     console.log(this.state.userToken)
-    // }
 
     async handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
         const ID = this.props.userId
-        console.log(ID)
+        // console.log(ID)
         const URL = `http://localhost:3000/user/edit/user/${ID}`;
         fetch(URL, {
             method: "PUT",
@@ -77,8 +68,8 @@ export default class EditUser extends Component<props, info> {
         })
             .then(res => res.json())
             .then(json => {
-                console.log(json)
-                if (json.user !== undefined){
+                // console.log(json)
+                if (json.user === "User updated successfully"){
                     sweetalert2.fire({
                         position: 'center',
                         title: json.message,
@@ -130,7 +121,7 @@ export default class EditUser extends Component<props, info> {
                     title="At least 5 characters"
                     required
                     />
-                    <button className="signup-inner-btn" type="submit">Submit</button>
+                    <button className="forms-user-btn" type="submit">Submit</button>
                 </form>
             </div>
             </div>

@@ -3,13 +3,16 @@ import {BsTrashFill} from 'react-icons/bs'
 import sweetalert2 from "sweetalert2";
 import './displayuser.css'
 
-
+type props = {
+    getFindUser: Array<any>, 
+    adminToken: string,
+}
 type types = {
     editBoolean: boolean,
-    toggleEditFunction: any
+    toggleEditFunction: Function
 }
 
-export default class DisplayUser extends Component<{getFindUser: any, adminToken: any}, types>{
+export default class DisplayUser extends Component<props, types>{
     constructor(props: any){
         super(props)
         this.state = {
@@ -20,12 +23,11 @@ export default class DisplayUser extends Component<{getFindUser: any, adminToken
         this.toggleEdit = this.toggleEdit.bind(this);
     }
 
-    toggleEdit = () => {
+    toggleEdit = (): void => {
         this.setState({
             editBoolean: !this.state.editBoolean
         })
-        console.log
-        (this.state.editBoolean, "editBoolean")
+        // console.log(this.state.editBoolean, "editBoolean")
     }
 
     //! DELETE ANIME
@@ -43,7 +45,7 @@ export default class DisplayUser extends Component<{getFindUser: any, adminToken
 
             const URL = `http://localhost:3000/admin/delete/user/by/admin/${ID}`
 
-            console.log(URL)
+            // console.log(URL)
             fetch(URL, ({
                 method: "DELETE",
                 headers: new Headers({
@@ -66,13 +68,12 @@ export default class DisplayUser extends Component<{getFindUser: any, adminToken
                 })
         }
 
+
     }
 
     render(){
-        // console.log(this.props, "=================================")
-        // console.log(this.props.getFindUser, "=================================")
+
         let getUser = this.props.getFindUser[0]
-        // console.log(getUser, "getUser---")
 
         return(
             <>

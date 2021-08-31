@@ -24,15 +24,13 @@ export default class DisplayEditDelete extends Component<{getFind: any, adminTok
         this.setState({
             editBoolean: !this.state.editBoolean
         })
-        console.log
-        (this.state.editBoolean, "editBoolean")
+        // console.log(this.state.editBoolean, "editBoolean")
     }
 
     //! DELETE ANIME
     async deleteAnime() {
         let getFindArr = await {...this.props.getFind};
-        console.log(getFindArr)
-        // const ID = await getFindArr[0].id;
+        // console.log(getFindArr)
 
         const Toast = sweetalert2.mixin({
             toast: true,
@@ -46,9 +44,7 @@ export default class DisplayEditDelete extends Component<{getFind: any, adminTok
             const ID = await getFindArr[0].id;
 
             const URL = `http://localhost:3000/anime/delete/${ID}`
-            // const URL = `http://localhost:3000/anime/delete/`
-
-            console.log(URL)
+            // console.log(URL)
             fetch(URL, ({
                 method: "DELETE",
                 headers: new Headers({
@@ -75,30 +71,30 @@ export default class DisplayEditDelete extends Component<{getFind: any, adminTok
 
     render(){
         let getAnime = this.props.getFind
-        console.log(getAnime)
+        // console.log(getAnime)
 
         return(
             <>
             {this.state.editBoolean ? <EditAnime {...this.state} {...this.props} /> : null}
             {this.props.getFind[0] !== undefined ? 
             (<div className="action-btn-inner">
-                <button className="action-btn" onClick={this.toggleEdit}>Edit</button>
-                <button className="action-btn" onClick={this.deleteAnime}>Delete</button>
+                <button className="action-btn edit-btn-anime" onClick={this.toggleEdit}>Edit</button>
+                <button className="action-btn delete-btn-anime" onClick={this.deleteAnime}>Delete</button>
             </div>)
             : (null)
             }
                 <table className="find-anime-adm">
                     <tr className="table-rows">
-                        <td className="specific">IMG</td>
-                        <td className="specific">title_name</td>
-                        <td className="specific">title_english</td>
-                        <td className="common">episodes</td>
-                        <td className="common">duration</td>
-                        <td className="common">rating</td>
-                        <td className="specific">description</td>
-                        <td className="specific">genres</td>
-                        <td className="specific">youTubeImg</td>
-                        <td className="specific">youTubeVideo</td>
+                        <td className="specific">Img</td>
+                        <td className="specific">Title</td>
+                        <td className="specific">English Title</td>
+                        <td className="common">Episodes</td>
+                        <td className="common">Duration</td>
+                        <td className="common">Rating</td>
+                        <td className="specific">Description</td>
+                        <td className="common">Anime Type</td>
+                        <td className="specific">Genre</td>
+                        <td className="specific">YouTube Video</td>
                     </tr>
                 {getAnime.map((anime: any) => {
                 return(
@@ -110,8 +106,8 @@ export default class DisplayEditDelete extends Component<{getFind: any, adminTok
                         <td className="common">{anime.duration}</td>
                         <td className="common">{anime.rating}</td>
                         <td className="specific specific-description"><div style={{height: '400px', fontSize: '13px'}}>{anime.description}</div></td>
+                        <td className="common">{anime.animeType}</td>
                         <td className="specific">{anime.genres}</td>
-                        <td className="specific">{anime.youTubeImg}</td>
                         <td className="specific">{anime.youTubeVideo}</td>
                     </tr>
                 )})}

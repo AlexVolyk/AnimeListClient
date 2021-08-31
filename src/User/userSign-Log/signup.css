@@ -1,7 +1,7 @@
-.INTEREST{
+.INTEREST {
     padding: 18.5vh
 }
-.signup-inner{
+.signup-inner {
     width: 400px;
     margin: 0 auto;
     /* margin-top: 25vh; */
@@ -17,6 +17,7 @@
 
 .signup-inner > h1 {
     margin-bottom: 30px;
+    user-select: none;
 }
 
 .signup-inner > form{
@@ -24,29 +25,79 @@
     display: inline-grid;
 }
 
-.signup-inner > form > input {
+.signup-inner > form > input, 
+.password-inner-btn > input {
     margin-bottom: 10px !important;
     padding: 6px;
     border-radius: 10px;
+    color: black;
     outline: none;
+    transition: 0.3s;
+    opacity: 1;
+    transition-property: opacity;
 }
-.signup-inner-btn {
-    margin-bottom: 10px  !important;
-    margin-top: 15px;
+
+.signup-inner > form > input{
+    transition: 0.3s;
+    opacity: 1;
+    transition-property: opacity;
+}
+.signup-inner > form > input:hover,
+.password-inner-btn > input:hover{
+    transition: 0.3s;
+    opacity: 0.8;
+    transition-property: opacity;
+}
+
+.signup-inner > form > input:focus,
+.password-inner-btn > input:focus{
+    transition: 0.3s;
+    opacity: 1;
+    transition-property: opacity;
+}
+
+.forms-user-btn {
+    margin-bottom: 10px !important;
+    margin-top: 10px;
     padding: 6px;
     border-radius: 10px;
     outline: none;
-    
+    /* color: black; */
+    background-color: grey;
+    transition: 0.5s !important;
+    transition-property: background-color;
 }
+
+.forms-user-btn:hover {    
+    /* color: white; */
+    background-color: #3e3e3e;
+    /* background-color: black; */
+    transition: 0.5s !important;
+    transition-property: background-color;
+}
+
+.forms-user-btn:active {    
+    /* color: white; */
+    background-color: black;
+    transition: 0.5s !important;
+    transition-property: background-color;
+}
+
 .password-inner-btn{
     position: relative;
 }
+
 .show-password-btn{
     position: absolute;
     padding: 0;
     top: 6px;
     right: 5px;
+    /* color: black !important; */
     background-color: transparent !important;
     outline: none;
     border: none;
+}
+
+.show-password-btn > svg > path{
+    color: black;
 }

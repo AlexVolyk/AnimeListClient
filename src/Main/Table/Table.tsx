@@ -2,21 +2,25 @@ import React, {Component} from "react";
 import DisplayAnimeList from "./Display/DisplayAnimeList";
 import './table.css'
 
-type tp = {
-    smt: Array<Object>,
-    genre: any
+
+type props = {
+
 }
-export default class Table extends Component<{},tp>{
+
+type current = {
+    smt: Array<Object>,
+
+}
+
+export default class Table extends Component<props, current>{
     constructor(props: any){
         super(props)
         this.state = {
             smt: [],
-            genre: ''
         }
         
         this.getAnimes = this.getAnimes.bind(this)
         this.setAnimes = this.setAnimes.bind(this)
-        // this.setting = this.setting.bind(this)
     }
 
     setAnimes(g: Array<Object>) {
@@ -31,15 +35,15 @@ export default class Table extends Component<{},tp>{
         fetch(URL)
             .then(res => res.json())
             .then(json => {
-                console.log(json)
+                // console.log(json)
                 this.setAnimes(json)
             })
     }
 
     componentDidMount(){
         this.getAnimes()
-        console.log("componentWillMount")
-        console.log(this.props, "++++++++++++++++++")
+        // console.log("componentWillMount")
+        // console.log(this.props, "++++++++++++++++++")
     }
 
 

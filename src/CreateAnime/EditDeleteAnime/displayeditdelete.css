@@ -51,7 +51,7 @@ td{
     border-radius: 10px;
     background-color: lavender;
     transition: 0.3s;
-    transition-property: background-color;
+    transition-property: color, background-color;
 }
 
 .action-btn:last-child{
@@ -61,9 +61,23 @@ td{
 .action-btn:hover{
     background-color: rgb(166, 166, 253);
     transition: 0.3s;
-    transition-property: background-color;
+    transition-property: color, background-color;
 }
 
 .table-rows{
     /* border: 1px solid blue !important; */
+}
+
+.edit-btn-anime{
+    background-color: #3c3cff;
+    color: black;
+    transition: 0.3s;
+    transition-property: color, background-color;
+}
+
+.delete-btn-anime{
+    background-color: red;
+    color: black;
+    transition: 0.3s;
+    transition-property: color, background-color;
 }

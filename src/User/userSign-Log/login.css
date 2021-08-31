@@ -1,17 +1,33 @@
-.login-inner > form{
-    /* margin: 0 auto !important; */
-    /* display: inline-grid !important; */
+
+.login-form{
+    display: grid;
 }
 
-.login-inner> form > input {
+.login-form > input {
     margin-bottom: 10px !important;
     padding: 6px;
     border-radius: 10px;
+    color: black;
     outline: none;
+    transition: 0.3s;
+    opacity: 1;
+    transition-property: opacity;
+}
+
+.login-form > input:hover {
+    transition: 0.3s;
+    opacity: 0.8;
+    transition-property: opacity;
+}
+
+.login-form > input:focus {
+    transition: 0.3s;
+    opacity: 1;
+    transition-property: opacity;
 }
 
 .login-inner-btn {
-    margin-bottom: 10px !important;
+    /* margin-bottom: 10px !important; */
     padding: 6px;
     border-radius: 10px;
     outline: none;

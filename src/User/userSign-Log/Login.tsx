@@ -1,99 +1,78 @@
 import {Modal, Form} from 'react-bootstrap';
 import React, {Component} from "react";
 import sweetalert2 from 'sweetalert2'
-// import { useHistory } from "react-router-dom";
-import './login.css'
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    NavLink,
-    Redirect,
-    } from "react-router-dom";
-    
-// import dog from '../../img/dog.jpg'
-// C:\Users\ACER\Desktop\pr\client\src\img\dog.jpg
-// import dog from '../../img/dog.jpg'
-// var im = require('../../img/dog.jpg')
-type parent = {
-    showLoginFunction: any, 
+import {AiFillEye, AiFillEyeInvisible} from 'react-icons/ai'
+import './login.css';
+
+type props = {
+    showLoginFunction: Function, 
     userShowLogin: boolean, 
-    gut: any, 
-    gun: any, 
-    guia: any,
-    gui: any
+    gut: Function, 
+    gun: Function, 
+    guia: Function,
+    gui: Function
 }
-type child = {
+type info = {
     username: string,
     email: string,
     password: string,
-    // userToken: string,
-    // userId: number
-    // login: object
+    showPasswordBoolean: boolean,
+
 }
 
-export default class Login extends Component<parent,child> {
+export default class Login extends Component<props, info> {
     constructor(props:any){
         super(props)
         
         this.state = {
             email: '',
             password: '',
-            // userToken: '',
             username: '',
-            // userId: 0,
+            showPasswordBoolean: false,
+
         }
         this.setEmail = this.setEmail.bind(this);
         this.setPassword = this.setPassword.bind(this);
-        // this.setUserToken = this.setUserToken.bind(this);
         this.setUsername = this.setUsername.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        // this.setUserId = this.setUserId.bind(this);
         this.closeModal = this.closeModal.bind(this);
+        this.showPasswordToggle = this.showPasswordToggle.bind(this)
+
     }
 
     setUsername(value: string) {
         this.setState({
             username: value
         })
-        console.log(this.state.username)
+        // console.log(this.state.username)
     }
 
     setEmail(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             email: e.target.value
         })
-        console.log(this.state.email)
+        // console.log(this.state.email)
     }
 
     setPassword(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             password: e.target.value
         })
-        console.log(this.state.password)
+        // console.log(this.state.password)
     }
 
-    // setUserToken(e: any ) {
-    //     this.setState({
-    //         userToken: e
-    //     })
-    //     console.log(this.state.userToken)
-    // }
-
-    // setUserId(e: any ) {
-    //     this.setState({
-    //         userId: e
-    //     })
-    //     console.log(this.state.userId)
-    // }
-
-    closeModal() {
+    closeModal(): void {
         this.props.showLoginFunction()
-        // window.location.assign('/')
+    }
+
+    showPasswordToggle (): void {
+        this.setState({
+            showPasswordBoolean: !this.state.showPasswordBoolean
+        })
+        // console.log(this.state.showPasswordBoolean)
     }
 
     handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        // window.location.assign('login');
         e.preventDefault()
         const URL = 'http://localhost:3000/user/login';
         fetch(URL, {
@@ -120,7 +99,7 @@ export default class Login extends Component<parent,child> {
                         icon: 'success',
                         showConfirmButton:false,
                     })
-                    console.log(json)
+                    // console.log(json)
                     this.props.gui(json.user.id)
                     this.setUsername(json.user.username)
                     this.props.gut(json.userSessionToken)
@@ -129,19 +108,7 @@ export default class Login extends Component<parent,child> {
 
                     this.closeModal()
                     window.history.pushState("/", "/", "/");
-                        // {<Redirect push to="/"/>}
-
-                    // <Router>
-                    //     <Route>
-                    //         <Redirect from='login' to="/"/>
-                    //     </Route>
-                    // </Router>
-                    // useHistory().push('/')
-                    // setTimeout(() => {
-                    //     window.location.assign('/');
-                    // },1900)
-                    // window.location.assign('/');
-                    // console.log(this.props.sut)
+                    
                 } else {
                     sweetalert2.fire({
                         position: 'center',
@@ -158,33 +125,40 @@ export default class Login extends Component<parent,child> {
     render(){
         return(
             <>
-        <Modal
-        show={true}
-        aria-labelledby="contained-modal-title-vcenter"
-        centered
-        onHide={this.closeModal}
-        >
-            <Modal.Header closeButton>
-                <Modal.Title id='ModalHeader' onClick={this.closeModal}>Login</Modal.Title>
-            </Modal.Header>
-            <Modal.Body style={{margin: "0 auto"}} className="login-inner">
-            <Form onSubmit={this.handleSubmit}>
-                        <input type="email"
-                        id="email"
-                        placeholder="email"
-                        onChange={this.setEmail}
-                        value={this.state.email}
-                        />
-                        <input type="text" 
-                        id="password"
-                        placeholder="password"
-                        onChange={this.setPassword}
-                        value={this.state.password}
-                        />
-                        <button className="login-inner-btn" type="submit">Submit</button>
-                    </Form>
-            </Modal.Body>
-        </Modal >
+                <Modal
+                show={true}
+                aria-labelledby="contained-modal-title-vcenter"
+                centered
+                onHide={this.closeModal}
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title id='ModalHeader' onClick={this.closeModal}>Login</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body style={{margin: "0 auto"}} className="login-inner">
+                        <Form onSubmit={this.handleSubmit} className="login-form">
+                                <input type="email"
+                                id="email"
+                                placeholder="email"
+                                onChange={this.setEmail}
+                                value={this.state.email}
+                                />
+                                <div className="password-inner-btn">
+                                    <input type={this.state.showPasswordBoolean ? "text" : "password"}
+                                    id="password"
+                                    placeholder="password"
+                                    onChange={this.setPassword}
+                                    value={this.state.password}
+                                    />
+                                    {this.state.showPasswordBoolean ? (
+                                    <button type="button" className="show-password-btn" onClick={this.showPasswordToggle}><AiFillEye /></button>
+                                        ) : (
+                                    <button type="button" className="show-password-btn" onClick={this.showPasswordToggle}><AiFillEyeInvisible /></button>
+                                    )}
+                                </div>
+                            <button className="forms-user-btn" type="submit">Submit</button>
+                        </Form>
+                </Modal.Body>
+            </Modal >
         </>
         )
     }

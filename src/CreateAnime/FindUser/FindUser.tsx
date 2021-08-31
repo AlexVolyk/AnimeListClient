@@ -1,21 +1,23 @@
 import React, {Component} from "react";
 import { BsSearch, } from "react-icons/bs";
-import sweetalert2 from "sweetalert2";
 import DisplayUser from "./DisplayUser/DisplayUser";
-// import './editdeleteanime.css'
 
-
+type props = {
+    adminToken: string, 
+}
 type types = {
     findUsername: string,
-    getFindUser: any
+    getFindUser: Array<Object>,
+    getFindUserFunction: Function
 }
 
-export default class EditAnimeDelete extends Component<{adminToken: any}, types>{
+export default class EditAnimeDelete extends Component<props, types>{
     constructor(props: any){
         super(props)
         this.state = {
             findUsername: '',
-            getFindUser: [] 
+            getFindUser: [],
+            getFindUserFunction: this.findUser
         }
         
         this.findUser = this.findUser.bind(this)
@@ -26,14 +28,14 @@ export default class EditAnimeDelete extends Component<{adminToken: any}, types>
         this.setState({
             findUsername: e.target.value
         })
-        console.log(this.state.findUsername, "findUsername")
+        // console.log(this.state.findUsername, "findUsername")
     }
 
     setGetFindUser(e: any) {
         this.setState({
             getFindUser: [e]
         })
-        console.log(this.state.getFindUser, "getFindUser")
+        // console.log(this.state.getFindUser, "getFindUser")
     }
 
     async findUser(){
@@ -52,7 +54,7 @@ export default class EditAnimeDelete extends Component<{adminToken: any}, types>
                 )
 
                 this.setGetFindUser(getUser)
-                console.log(json, "json")
+                // console.log(json, "json")
             })
         
     }
@@ -65,12 +67,12 @@ export default class EditAnimeDelete extends Component<{adminToken: any}, types>
                         <BsSearch />
                     </button>
                     <input type="text"
+                    placeholder="username"
                     value={this.state.findUsername}
                     onChange={this.setFindUser}
                     className="search-input"
                     autoFocus/>
                     <DisplayUser {...this.state} {...this.props}/>
-                    {/* <button onClick={this.findAnime} className="search-btn" autoFocus><BsSearch /></button> */}
                 </div>
             </>
         )

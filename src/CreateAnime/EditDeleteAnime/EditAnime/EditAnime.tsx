@@ -3,7 +3,11 @@ import sweetalert2 from "sweetalert2";
 import {Modal, Form} from 'react-bootstrap';
 import './editanime.css'
 
-
+type props = {
+    adminToken: string, 
+    toggleEditFunction: Function,
+    getFind: Array<any>
+}
 
 type types = {
     title_name: string,
@@ -15,11 +19,11 @@ type types = {
     duration: string,
     rating: string,
     img: string,
-    youTubeImg: string,
+    animeType: string,
     youTubeVideo: string,
 }
 
-export default class EditAnime extends Component<{adminToken: any, toggleEditFunction: any, getFind: any}, types>{
+export default class EditAnime extends Component<props, types>{
     constructor(props: any){
         super(props)
         const editObj = this.props.getFind[0]
@@ -33,7 +37,7 @@ export default class EditAnime extends Component<{adminToken: any, toggleEditFun
             duration: editObj.duration,
             rating: editObj.rating,
             img: editObj.img,
-            youTubeImg: editObj.youTubeImg,
+            animeType: editObj.animeType,
             youTubeVideo: editObj.youTubeVideo,
         }
         this.setTitleName = this.setTitleName.bind(this);
@@ -45,7 +49,7 @@ export default class EditAnime extends Component<{adminToken: any, toggleEditFun
         this.setDuration = this.setDuration.bind(this);
         this.setRating = this.setRating.bind(this);
         this.setImg = this.setImg.bind(this);
-        this.setYouTubeImg = this.setYouTubeImg.bind(this);
+        this.setAnimeType = this.setAnimeType.bind(this);
         this.setYouTubeVideo = this.setYouTubeVideo.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.closeModal = this.closeModal.bind(this);
@@ -55,77 +59,77 @@ export default class EditAnime extends Component<{adminToken: any, toggleEditFun
         this.setState({
             title_name: e.target.value
         })
-        console.log(this.state.title_name)
+        // console.log(this.state.title_name)
     }
     
     setTitleEnglish(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             title_english: e.target.value
         })
-        console.log(this.state.title_english)
+        // console.log(this.state.title_english)
     }
 
     setDescription(e: React.ChangeEvent<HTMLTextAreaElement>) {
         this.setState({
             description: e.target.value
         })
-        console.log(this.state.description)
+        // console.log(this.state.description)
     }
 
     setEpisodes(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             episodes: +e.target.value // ! string in number
         })
-        console.log(this.state.episodes)
+        // console.log(this.state.episodes)
     }
 
     setStudios(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             studios: e.target.value
         })
-        console.log(this.state.studios)
+        // console.log(this.state.studios)
     }
 
     setGenres(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             genres: e.target.value
         })
-        console.log(this.state.genres)
+        // console.log(this.state.genres)
     }
 
     setDuration(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             duration: e.target.value
         })
-        console.log(this.state.duration)
+        // console.log(this.state.duration)
     }
 
     setRating(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             rating: e.target.value
         })
-        console.log(this.state.rating)
+        // console.log(this.state.rating)
     }
 
     setImg(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             img: e.target.value
         })
-        console.log(this.state.img)
+        // console.log(this.state.img)
     }
 
-    setYouTubeImg(e: React.ChangeEvent<HTMLInputElement>) {
+    setAnimeType(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
-            youTubeImg: e.target.value
+            animeType: e.target.value
         })
-        console.log(this.state.youTubeImg)
+        // console.log(this.state.animeType)
     }
 
     setYouTubeVideo(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             youTubeVideo: e.target.value
         })
-        console.log(this.state.youTubeVideo)
+        // console.log(this.state.youTubeVideo)
     }
 
     closeModal() {
@@ -152,7 +156,7 @@ export default class EditAnime extends Component<{adminToken: any, toggleEditFun
                     duration: this.state.duration,
                     rating: this.state.rating,
                     img: this.state.img,
-                    youTubeImg: this.state.youTubeImg,
+                    animeType: this.state.animeType,
                     youTubeVideo: this.state.youTubeVideo
                 }
             }),
@@ -163,7 +167,7 @@ export default class EditAnime extends Component<{adminToken: any, toggleEditFun
         })
         .then(res => res.json())
         .then(json => {
-            console.log(json)
+            // console.log(json)
             const Toast = sweetalert2.mixin({
                 toast: true,
                 position: 'top-end',
@@ -192,7 +196,6 @@ export default class EditAnime extends Component<{adminToken: any, toggleEditFun
 
     render(){
         // let getFindArr = {...this.props.getFind};
-        // // const ID = await getFindArr[0].id;
         // let obj = getFindArr[0]
         // console.log(obj, "obj")
         return(
@@ -207,7 +210,7 @@ export default class EditAnime extends Component<{adminToken: any, toggleEditFun
             </Modal.Header>
             <Modal.Body style={{margin: "0 auto"}}>
             <Form className="create-form" onSubmit={this.handleSubmit}>
-            <div className="container">
+            <div className="container anime-form">
                     <div className="TItle">
                         <label htmlFor="title_name">Title Name</label>
                         <input type="text" 
@@ -317,15 +320,15 @@ export default class EditAnime extends Component<{adminToken: any, toggleEditFun
                         required
                         />
                     </div>
-                    <div className="Screensaver">
-                    <label htmlFor="youTubeImg">Screensaver</label>
+                    <div className="AnimeType">
+                    <label htmlFor="animeType">Type</label>
                         <input type="text" 
-                        name="youTubeImg" 
-                        id="youTubeImg"
+                        name="animeType" 
+                        id="animeType"
                         className="width-for-all" 
-                        placeholder="URL from screensaver"
-                        onChange={this.setYouTubeImg}
-                        value={this.state.youTubeImg}
+                        placeholder="Anime type"
+                        onChange={this.setAnimeType}
+                        value={this.state.animeType}
                         required
                         />
                     </div>

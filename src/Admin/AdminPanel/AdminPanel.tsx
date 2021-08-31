@@ -4,14 +4,17 @@ import CreateAnime from '../../CreateAnime/CreateAnime'
 import EditDeleteAnime from '../../CreateAnime/EditDeleteAnime/EditDeleteAnime'
 import FindUser from '../../CreateAnime/FindUser/FindUser'
 
+type props = {
+    adminToken: string,
+}
 
 type p = {
     createAnimeBoolean: boolean,
     edit_deleteAnimeBoolean: boolean,
-    find_userBoolean: boolean
+    find_userBoolean: boolean,
 
 }
-export default class AdminNavbar extends Component<{adminToken:string}, p>{
+export default class AdminNavbar extends Component<props, p>{
     constructor(props: any){
         super(props)
         this.state = {
@@ -25,7 +28,7 @@ export default class AdminNavbar extends Component<{adminToken:string}, p>{
 
     }
 
-    toggleCreateAnime = () => {
+    toggleCreateAnime = (): void => {
         this.setState({
             createAnimeBoolean: true,
             edit_deleteAnimeBoolean: false,
@@ -33,7 +36,7 @@ export default class AdminNavbar extends Component<{adminToken:string}, p>{
         })
     }
 
-    toggleEdit_DeleteAnime = () => {
+    toggleEdit_DeleteAnime = (): void => {
         this.setState({
             edit_deleteAnimeBoolean: true,
             createAnimeBoolean: false,
@@ -42,13 +45,14 @@ export default class AdminNavbar extends Component<{adminToken:string}, p>{
         })
     }
 
-    toggleFind_User = () => {
+    toggleFind_User = (): void => {
         this.setState({
             find_userBoolean: true,
             edit_deleteAnimeBoolean: false,
             createAnimeBoolean: false,
         })
     }
+    
     render(){
         return(
                 <div className="admin-panel">
@@ -60,7 +64,6 @@ export default class AdminNavbar extends Component<{adminToken:string}, p>{
                         </ul>
                     </nav>
                     {this.state.createAnimeBoolean ? <CreateAnime {...this.props}/> : null}
-                    {/* <CreateAnime {...this.props}/> */}
                     {this.state.edit_deleteAnimeBoolean ? <EditDeleteAnime {...this.props}/> : null}
                     {this.state.find_userBoolean ? <FindUser {...this.props}/> : null}
                 </div>

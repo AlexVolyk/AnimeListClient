@@ -1,36 +1,30 @@
 import React, {Component} from "react";
 import './header.css'
-// import Login from '../User/userSign-Log/Login'
-import {Modal, Nav} from 'react-bootstrap';
-import SignUp from '../User/userSign-Log/SignUp'
 import Login from '../User/userSign-Log/Login'
 import AdminLogin from '../Admin/AdminLogin'
 import {
     BrowserRouter as Router,
-    Switch,
-    Route,
     NavLink,
-    Redirect
     } from "react-router-dom";
 
-type prop = {
-    gut: any, 
-    gun: any, 
-    guia: any,
+type props = {
+    gut: Function, 
+    gun: Function, 
+    guia: Function,
     userIsAdmin: boolean,
-    gat: any,
-    gaia: any,
-    gui: any
+    gat: Function,
+    gaia: Function,
+    gui: Function,
 }
 
 type booleans = {
-    showLoginFunction: any,
+    showLoginFunction: Function,
     userShowLogin: boolean,
     adminShowLogin: boolean,
-    adminShowLoginFunction: any
+    adminShowLoginFunction: Function,
 }
 
-export default class Header extends Component<prop, booleans> {
+export default class Header extends Component<props, booleans> {
 constructor(props: any){
     super(props)
 
@@ -48,14 +42,14 @@ setUserShowLogin = (): void => {
     this.setState({
         userShowLogin: !this.state.userShowLogin
     })
-    console.log(this.state.userShowLogin)
+    // console.log(this.state.userShowLogin)
 }
 
 setAdminShowLogin = (): void => {
     this.setState({
         adminShowLogin: !this.state.adminShowLogin
     })
-    console.log(this.state.adminShowLogin)
+    // console.log(this.state.adminShowLogin)
 }
     render(){
 

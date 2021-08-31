@@ -4,12 +4,24 @@
     font-size: 13px;
 }
 
+#parse {
+    padding: 10px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+}
+
 .create-form{
     margin: 0 auto;
     width: 800px !important;
     display: grid;
     margin-top: 10vh;
     font-size: 13px;
+}
+
+.anime-form > div > input{
+    padding: 6px;
+    border-radius: 10px;
 }
 
 .create-form input{
@@ -94,17 +106,17 @@
     gap: 10px 10px;
     grid-auto-flow: row;
     grid-template-areas:
-    "TItle TItle Title_english Title_english"
+    "Title Title Title_english Title_english"
     "Description Description Description Description"
     "Episodes Episodes Studios Studios"
     "Genres Genres Genres Genres"
-    "Duration Duration Rating Rating"
+    "Duration AnimeType Rating Rating"
     "Poster Poster Poster Poster"
-    "Screensaver Screensaver Screensaver Screensaver"
+    /* "Screensaver Screensaver Screensaver Screensaver" */
     "YouTube-URL YouTube-URL YouTube-URL YouTube-URL";
 }
 
-.TItle { grid-area: TItle; }
+.Title { grid-area: Title; }
 
 .Title_english { grid-area: Title_english; }
 
@@ -122,6 +134,6 @@
 
 .Poster { grid-area: Poster; }
 
-.Screensaver { grid-area: Screensaver; }
+.AnimeType { grid-area: AnimeType; }
 
 .YouTube-URL { grid-area: YouTube-URL; }

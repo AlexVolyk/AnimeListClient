@@ -3,6 +3,10 @@ import { Form } from "react-bootstrap";
 import sweetalert2 from "sweetalert2";
 import './createanime.css'
 
+type props = {
+    adminToken: string,
+}
+
 type types = {
     title_name: string,
     title_english: string,
@@ -13,12 +17,12 @@ type types = {
     duration: string,
     rating: string,
     img: string,
-    youTubeImg: string,
+    animeType: string,
     youTubeVideo: string,
     parsUrl: string
 }
 
-export default class CreateAnime extends Component<{adminToken: string},types>{
+export default class CreateAnime extends Component<props, types>{
     constructor(props: any){
         super(props)
         this.state = {
@@ -31,7 +35,7 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
             duration: "",
             rating: "",
             img: "",
-            youTubeImg: "",
+            animeType: "",
             youTubeVideo: "",
             parsUrl: ""
         }
@@ -45,7 +49,7 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
         this.setDuration = this.setDuration.bind(this);
         this.setRating = this.setRating.bind(this);
         this.setImg = this.setImg.bind(this);
-        this.setYouTubeImg = this.setYouTubeImg.bind(this);
+        this.setAnimeType = this.setAnimeType.bind(this);
         this.setYouTubeVideo = this.setYouTubeVideo.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.setParsUrl = this.setParsUrl.bind(this);
@@ -56,85 +60,103 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
         this.setState({
             title_name: e.target.value
         })
-        console.log(this.state.title_name)
+        // console.log(this.state.title_name)
     }
     
     setTitleEnglish(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             title_english: e.target.value
         })
-        console.log(this.state.title_english)
+        // console.log(this.state.title_english)
     }
 
     setDescription(e: React.ChangeEvent<HTMLTextAreaElement>) {
         this.setState({
             description: e.target.value
         })
-        console.log(this.state.description)
+        // console.log(this.state.description)
     }
 
     setEpisodes(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             episodes: +e.target.value // ! string in number
         })
-        console.log(this.state.episodes)
+        // console.log(this.state.episodes)
     }
 
     setStudios(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             studios: e.target.value
         })
-        console.log(this.state.studios)
+        // console.log(this.state.studios)
     }
 
     setGenres(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             genres: e.target.value
         })
-        console.log(this.state.genres)
+        // console.log(this.state.genres)
     }
 
     setDuration(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             duration: e.target.value
         })
-        console.log(this.state.duration)
+        // console.log(this.state.duration)
     }
 
     setRating(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             rating: e.target.value
         })
-        console.log(this.state.rating)
+        // console.log(this.state.rating)
     }
 
     setImg(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             img: e.target.value
         })
-        console.log(this.state.img)
+        // console.log(this.state.img)
     }
 
-    setYouTubeImg(e: React.ChangeEvent<HTMLInputElement>) {
+    setAnimeType(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
-            youTubeImg: e.target.value
+            animeType: e.target.value
         })
-        console.log(this.state.youTubeImg)
+        // console.log(this.state.animeType)
     }
 
     setYouTubeVideo(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             youTubeVideo: e.target.value
         })
-        console.log(this.state.youTubeVideo)
+        // console.log(this.state.youTubeVideo)
     }
 
     setParsUrl(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             parsUrl: e.target.value
         })
-        console.log(this.state.parsUrl)
+        // console.log(this.state.parsUrl)
     }
+
+    setResetStates = () => {
+        this.setState({
+            title_name: "",
+            title_english: "",
+            description: "",
+            episodes: 0,
+            studios: "",
+            genres: "",
+            duration: "",
+            rating: "",
+            img: "",
+            animeType: "",
+            youTubeVideo: ""
+        })
+    }
+
+
     //! PARSE ANIME
     async parserFunction() {
         const URL = "http://localhost:3000/anime/pars";
@@ -152,9 +174,9 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
         })
         .then(res => res.json())
         .then(json => {
-            console.log(json)
+            // console.log(json)
 
-            console.log(json.message)
+            // console.log(json.message)
             const Toast = sweetalert2.mixin({
                 toast: true,
                 position: 'top-end',
@@ -163,18 +185,22 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
                 timerProgressBar: true,
                 })
             if (json.parsThis !== undefined){
+
                 let get = json.parsThis
+                let regExp = new RegExp('([a-z])([A-Z])' ,"g")
+                let regExpGanres = get.genres.replace(regExp, '$1, $2');
+
                 this.setState({
                     title_name: get.title_name,
                     title_english: get.title_english,
                     description: get.description,
                     episodes: get.episodes,
                     studios: get.studios,
-                    genres: get.genres,
+                    genres: regExpGanres,
                     duration: get.duration,
                     rating: get.rating,
                     img: get.img,
-                    youTubeImg: get.youTubeImg,
+                    animeType: get.animeType,
                     youTubeVideo: get.youTubeVideo
                 })
 
@@ -195,21 +221,7 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
         })
 }
 
-    setResetStates = () => {
-        this.setState({
-            title_name: "",
-            title_english: "",
-            description: "",
-            episodes: 0,
-            studios: "",
-            genres: "",
-            duration: "",
-            rating: "",
-            img: "",
-            youTubeImg: "",
-            youTubeVideo: ""
-        })
-    }
+
     //! CREATE ANIME
     handleSubmit(e: React.FormEvent<HTMLFormElement>){
         e.preventDefault()
@@ -227,7 +239,7 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
                     duration: this.state.duration,
                     rating: this.state.rating,
                     img: this.state.img,
-                    youTubeImg: this.state.youTubeImg,
+                    animeType: this.state.animeType,
                     youTubeVideo: this.state.youTubeVideo
                 }
             }),
@@ -238,7 +250,7 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
         })
         .then(res => res.json())
         .then(json => {
-            console.log(json)
+            // console.log(json)
             const Toast = sweetalert2.mixin({
                 toast: true,
                 position: 'top-end',
@@ -246,6 +258,7 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
                 timer: 3000,
                 timerProgressBar: true,
                 })
+
             if (json.anime !== undefined){
                 Toast.fire({
                     icon: 'success',
@@ -272,15 +285,14 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
             <input type="text" 
             name="parse" 
             id="parse"
-            // className="width-for-all" 
             placeholder="Parse URL *MyAnimeList"
             onChange={this.setParsUrl}
             value={this.state.parsUrl}
             />
             <button className="create-btn" onClick={this.parserFunction}>Parse</button>
             <Form className=" create-form" onSubmit={this.handleSubmit}>
-                <div className="container">
-                    <div className="TItle">
+                <div className="container anime-form">
+                    <div className="Title">
                         <label htmlFor="title_name">Title Name</label>
                         <input type="text" 
                         name="title_name" 
@@ -389,15 +401,15 @@ export default class CreateAnime extends Component<{adminToken: string},types>{
                         required
                         />
                     </div>
-                    <div className="Screensaver">
-                    <label htmlFor="youTubeImg">Screensaver</label>
+                    <div className="AnimeType">
+                    <label htmlFor="animeType">Type</label>
                         <input type="text" 
-                        name="youTubeImg" 
-                        id="youTubeImg"
+                        name="animeType" 
+                        id="animeType"
                         className="width-for-all" 
-                        placeholder="URL from screensaver"
-                        onChange={this.setYouTubeImg}
-                        value={this.state.youTubeImg}
+                        placeholder="Anime type"
+                        onChange={this.setAnimeType}
+                        value={this.state.animeType}
                         required
                         />
                     </div>

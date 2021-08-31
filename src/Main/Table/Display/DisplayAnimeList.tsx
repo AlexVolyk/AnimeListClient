@@ -1,87 +1,73 @@
 import React, {Component} from "react";
 import './displayanimelist.css'
-import Test from './Test'
-
 
 type props = {
-    smt: any,
+    smt: Array<Object>,
 }
-type t = {
-    sss: any,
-}
-type a = {
-    k:any
+type current = {
+    sss: string, //!
 }
 
-export default class DisplayAnimeList extends Component<props, t, a>{
+
+export default class DisplayAnimeList extends Component<props, current>{
     constructor(props: any){
         super(props)
         this.state = {
             sss: ''
+            
         }
     }
 
     componentDidMount(){
         let getLoc = window.location.pathname
         let genr = getLoc.replace('/genre/', '')
-        console.log(genr, "ganr")
+        // console.log(genr, "ganr")
         this.setState({sss: genr})
     }
 
     render(){
-        var animes
-        if(this.state.sss !== '/') {
+        var animes;
+        if(this.state.sss === "/delete/account") {
+            animes = this.props.smt
+            // console.log(window.location.pathname)
+
+        } else if(this.state.sss === "/login") { 
+            animes = this.props.smt
+            // console.log(window.location.pathname)
+
+        } else if (this.state.sss !== '/')  {
             let filtered = this.props.smt.filter((anime: any) => {
                 let genre = anime.genres.toLowerCase()
                 let animeArr = genre.includes(this.state.sss)
                 return animeArr
             })
             animes = filtered
-            console.log(animes)
-
-        } else if (this.state.sss === '/delete/account')  {
-            animes = this.props.smt
-            console.log(animes)
+            // console.log(window.location.pathname)
         } else {
             animes = this.props.smt
-            console.log(animes)
+            // console.log(animes, 'animes')
         }
-
-
+        
         return(
-            
-        //     <div className="card-container">
-        //     <img src='https://cdn.myanimelist.net/images/anime/1811/115541.jpg' alt="" />
-        //     <div className="info">
-        //         <p>Vanitas no Karte {this.state.sss}</p>
-        //         <p>The Case Study of Vanitas</p>
-        //         <p>12</p>
-        //         <p>23 min. per ep.</p>
-        //         <p>Bones</p>
-        //         <p>Scorned by others of his kind for being born under a blue moon, the vampire Vanitas grew afraid and desolate. According to legend, he created a cursed grimoire known as the "Book of Vanitas," and it is said he would one day use it to bring retribution upon all vampires of the crimson moon. In 19th century Paris, Noé Archiviste is searching for the fabled Book of Vanitas. Whilst traveling aboard an airship, he is saved from a vampire attack by an eccentric doctor who calls himself Vanitas and carries the very tome he seeks. Ironically, the self-proclaimed vampire specialist is a mere human who inherited both his name and the book from his master, the same Vanitas of legend. As the odd case of the Charlatan's Parade crops up, the doctor's ability to restore sanity to vampires by recovering their true name will prove most beneficial.</p>
-        //         <p>R - 17+ (violence & profanity)</p>
-        //     </div> 
-        // </div>
             <>
             {animes.length !== 0 && animes[0] !== null ? (
+                
                 animes.map((anime: any, key: number) => {
+                    
                     let src = '/anime/' + anime.title_name.replaceAll(' ', "_")
 
                 return(
                 <div className="card-container" key={key}>
-                <a href={src}><img src={anime.img} alt={anime.title_name} title={anime.title_name} /></a>
+                <a href={src}><img src={anime.img} alt={anime.title_name} title={anime.title_name} className="anime-list-img" /></a>
                 <div className="info">
-                    <p>{anime.title_name}</p>
-                    <p>{anime.title_english}</p>
-                    <p>{anime.episodes}</p>
-                    <p>{anime.duration}</p>
-                    <p>{anime.rating}</p>
-                    <p>{anime.description}</p>
-                    <p>{anime.rating}</p>
+                    <p><span>Title: </span>{anime.title_name}</p>
+                    <p><span>English Title: </span>{anime.title_english}</p>
+                    <p><span>Type: </span>{anime.animeType}</p>
+                    <p><span>Episodes: </span>{anime.episodes}</p>
+                    <p><span>Duration: </span>{anime.duration}</p>
                 </div>
-                {/* <Test k={key}/> */}
             </div>
-            )}, console.log(window.location.pathname)
+            )}
             )
             ) : (
                 <div className="not-found-animes">NOT FOUND</div>

@@ -50,14 +50,14 @@ export default class EditAnimeDelete extends Component<{adminToken: any}, types>
         this.setState({
             findName: e.target.value
         })
-        console.log(this.state.findName, "findName")
+        // console.log(this.state.findName, "findName")
     }
 
     setGetFind(e: any) {
         this.setState({
             getFind: [e]
         })
-        console.log(this.state.getFind, "getFind")
+        // console.log(this.state.getFind, "getFind")
     }
 
     findAnime(){
@@ -85,7 +85,7 @@ export default class EditAnimeDelete extends Component<{adminToken: any}, types>
                         title: json.message
                     })
                     this.setGetFind(json.find)
-                    console.log(json.find)
+                    // console.log(json.find)
 
                 } else{
                     sweetalert2.fire({
@@ -100,7 +100,7 @@ export default class EditAnimeDelete extends Component<{adminToken: any}, types>
                         title: "Not Found"
                     })
                     
-                    console.log(json.find)
+                    // console.log(json.find)
 
                 }
             })
@@ -113,11 +113,11 @@ export default class EditAnimeDelete extends Component<{adminToken: any}, types>
             <div className="search-inner">
             <button onClick={this.findAnime} className="search-btn" autoFocus><BsSearch /></button>
                 <input type="text"
+                placeholder="anime title"
                 value={this.state.findName}
                 onChange={this.setFindName}
                 className="search-input"
                 autoFocus/>
-                {/* <button onClick={this.findAnime} className="search-btn" autoFocus><BsSearch /></button> */}
                 <DisplayEditDelete {...this.state} {...this.props} />
             </div>
             </>

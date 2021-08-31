@@ -1,69 +1,82 @@
 import React, {Component} from "react";
 import {Modal, Form} from 'react-bootstrap';
 import sweetalert2 from "sweetalert2"
+import {AiFillEye, AiFillEyeInvisible} from 'react-icons/ai'
 import './adminlogin.css';
 
-type parent = {
-    adminShowLoginFunction: any,
+type props = {
+    adminShowLoginFunction: Function,
     adminShowLogin: boolean,
-    gat: any,
-    gaia: any
+    gat: Function,
+    gaia: Function
 }
 
 type info = {
     username: string,
     email: string,
     password: string,
-    adminToken: string
+    adminToken: string,
+    showPasswordBoolean: boolean
 }
 
-export default class SignUp extends Component<parent, info> {
+export default class SignUp extends Component<props, info> {
     constructor(props: any){
         super(props)
         this.state = {
             username: 'kozaklyho',
             email: 'kozaklyho@gmail.com',
             password: 'kozaklyho' ,
-            adminToken: ''
+            adminToken: '',
+            showPasswordBoolean: false,
+
         }
         this.setEmail = this.setEmail.bind(this);
         this.setPassword = this.setPassword.bind(this);
         this.setAdminToken = this.setAdminToken.bind(this);
         this.setUsername = this.setUsername.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);  // !
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.closeModal = this.closeModal.bind(this);
+        this.showPasswordToggle = this.showPasswordToggle.bind(this)
+
     }
-    setUsername(e: React.ChangeEvent<HTMLInputElement>){
+    setUsername(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             username: e.target.value
         })
-        console.log(this.state.username)
+        // console.log(this.state.username)
     }
 
-    setEmail(e: React.ChangeEvent<HTMLInputElement>){
+    setEmail(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             email: e.target.value
         })
-        console.log(this.state.email)
+        // console.log(this.state.email)
     }
 
-    setPassword(e: React.ChangeEvent<HTMLInputElement>){
+    setPassword(e: React.ChangeEvent<HTMLInputElement>) {
         this.setState({
             password: e.target.value
         })
-        console.log(this.state.password)
+        // console.log(this.state.password)
     }
 
-    setAdminToken(e: string ){
+    setAdminToken(e: string ) {
         this.setState({
             adminToken: e
         })
-        console.log(this.state.adminToken)
+        // console.log(this.state.adminToken)
     }
 
     closeModal() {
         this.props.adminShowLoginFunction()
         // window.location.assign('/')
+    }
+
+    showPasswordToggle = ():void => {
+        this.setState({
+            showPasswordBoolean: !this.state.showPasswordBoolean
+        })
+        // console.log(this.state.showPasswordBoolean)
     }
 
     handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -123,9 +136,9 @@ export default class SignUp extends Component<parent, info> {
             <Modal.Header closeButton>
                 <Modal.Title id='ModalHeader' onClick={this.closeModal}>Admin Login</Modal.Title>
             </Modal.Header>
-            <Modal.Body className="modal-admlogin">
-            {/* <div className="sign-log"> */}
-                <Form onSubmit={this.handleSubmit}className="login-inner">
+            <Modal.Body className="modal-admin-login">
+            <div className="admin-login">
+                <Form onSubmit={this.handleSubmit} className="login-inner">
                     <input type="text"
                     id="username"
                     placeholder="username"
@@ -138,14 +151,22 @@ export default class SignUp extends Component<parent, info> {
                     onChange={this.setEmail}
                     value={this.state.email}
                     />
-                    <input type="text" 
-                    id="password"
-                    placeholder="password"
-                    onChange={this.setPassword}
-                    value={this.state.password}
-                    />
-                    <button type="submit" className="login-inner-btn">Submit</button>
+                    <div className="password-inner-btn">
+                        <input type={this.state.showPasswordBoolean ? "text" : "password"} 
+                        id="password"
+                        placeholder="password"
+                        onChange={this.setPassword}
+                        value={this.state.password}
+                        />
+                        {this.state.showPasswordBoolean ? (
+                        <button type="button" className="show-password-btn" onClick={this.showPasswordToggle}><AiFillEye /></button>
+                            ) : (
+                        <button type="button" className="show-password-btn" onClick={this.showPasswordToggle}><AiFillEyeInvisible /></button>
+                        )}
+                    </div>
+                    <button type="submit" className="login-inner-btn forms-user-btn">Submit</button>
                     </Form>
+                    </div>
             </Modal.Body>
         </Modal >
         </>

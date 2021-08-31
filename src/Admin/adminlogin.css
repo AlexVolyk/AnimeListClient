@@ -6,22 +6,37 @@
     background-color: cornflowerblue;
 }
 
-.modal-admlogin{
+.modal-admin-login{
     text-align: center;
 }
-form{
+.admin-login > form {
     display: inline-grid;
 }
 
-input {
+.admin-login > form > input, button {
     margin-bottom: 10px !important;
     padding: 6px;
     border-radius: 10px;
     outline: none;
+    
 }
-button {
-    margin-bottom: 10px;
-    padding: 6px;
-    border-radius: 10px;
-    outline: none;
+
+.admin-login > form > input{
+    color: black;
+    transition: 0.3s;
+    opacity: 1;
+    transition-property: opacity;
+
+}
+
+.admin-login > form > input:hover{
+    transition: 0.3s;
+    opacity: 0.8;
+    transition-property: opacity;
+}
+
+.admin-login > form > input:focus{
+    transition: 0.3s;
+    opacity: 1;
+    transition-property: opacity;
 }

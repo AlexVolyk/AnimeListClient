@@ -14,12 +14,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-ul{
+ul {
   list-style: none;
 }
 
-p{
+p {
   margin-bottom: 0;
+}
+
+img {
+  display: block !important;
 }
 
 /* width */
@@ -34,13 +38,18 @@ p{
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgb(153, 83, 83);
+  /* background: rgb(153, 83, 83); */
+  background-color: rgba(255, 255, 255, 0.5);
   border-radius: 8px;
+  transition: 0.3s;
+  transition-property: background-color;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(170, 58, 58);
+  background: rgb(255, 255, 255);
+  transition: 0.3s;
+  transition-property: background-color;
 }
 
 code {
