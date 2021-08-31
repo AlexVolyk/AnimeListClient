@@ -5,7 +5,8 @@ switch (window.location.hostname) {
         break;
 
     case "avanimelist.herokuapp.com":
-        APIURL = "https://avanimelist.herokuapp.com";
+        // "https://aaanimelist.herokuapp.com"
+        APIURL = "https://aaanimelist.herokuapp.com";
         break;
 
     default:
