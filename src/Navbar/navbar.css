@@ -53,9 +53,9 @@
     text-decoration: underline;
 }
 
-.navbar-toggler{
+/* .navbar-toggler{
     background-color: blueviolet;
-}
+} */
 
 .navbar-toggler:focus{
     outline: none !important;
