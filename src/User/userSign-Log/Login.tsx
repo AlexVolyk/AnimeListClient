@@ -3,6 +3,7 @@ import React, {Component} from "react";
 import sweetalert2 from 'sweetalert2'
 import {AiFillEye, AiFillEyeInvisible} from 'react-icons/ai'
 import './login.css';
+import APIURL from '../../helpers/environment'
 
 type props = {
     showLoginFunction: Function, 
@@ -74,7 +75,7 @@ export default class Login extends Component<props, info> {
 
     handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
-        const URL = 'http://localhost:3000/user/login';
+        const URL = `${APIURL}/user/login`;
         fetch(URL, {
             method: "POST",
             body: JSON.stringify({

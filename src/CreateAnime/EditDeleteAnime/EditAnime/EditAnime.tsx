@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import sweetalert2 from "sweetalert2";
 import {Modal, Form} from 'react-bootstrap';
 import './editanime.css'
+import APIURL from '../../../helpers/environment'
 
 type props = {
     adminToken: string, 
@@ -142,7 +143,7 @@ export default class EditAnime extends Component<props, types>{
         const getFindArr = await {...this.props.getFind};
         const ID = await getFindArr[0].id;
 
-        const URL = `http://localhost:3000/anime/edit/${ID}`;
+        const URL = `${APIURL}/anime/edit/${ID}`;
         fetch(URL, {
             method: "PUT",
             body: JSON.stringify({

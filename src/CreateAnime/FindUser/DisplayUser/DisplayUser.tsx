@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {BsTrashFill} from 'react-icons/bs'
 import sweetalert2 from "sweetalert2";
 import './displayuser.css'
+import APIURL from '../../../helpers/environment'
 
 type props = {
     getFindUser: Array<any>, 
@@ -43,7 +44,7 @@ export default class DisplayUser extends Component<props, types>{
             })
         if(ID !== undefined) {
 
-            const URL = `http://localhost:3000/admin/delete/user/by/admin/${ID}`
+            const URL = `${APIURL}/admin/delete/user/by/admin/${ID}`
 
             // console.log(URL)
             fetch(URL, ({

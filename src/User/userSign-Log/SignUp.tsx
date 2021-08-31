@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import sweetalert2 from "sweetalert2"
 import {AiFillEye, AiFillEyeInvisible} from 'react-icons/ai'
 import './signup.css'
+import APIURL from '../../helpers/environment'
 
 type props = {
     gui: Function,
@@ -64,7 +65,7 @@ export default class SignUp extends Component<props, info> {
     async handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
 
-        const URL = 'http://localhost:3000/user/register';
+        const URL = `${APIURL}/user/register`;
         fetch(URL, {
             method: "POST",
             body: JSON.stringify({

@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import './displayeditdelete.css'
 import sweetalert2 from "sweetalert2";
 import EditAnime from './EditAnime/EditAnime'
-
+import APIURL from '../../helpers/environment'
 
 type types = {
     editBoolean: boolean,
@@ -43,7 +43,7 @@ export default class DisplayEditDelete extends Component<{getFind: any, adminTok
         if(getFindArr[0] !== undefined) {
             const ID = await getFindArr[0].id;
 
-            const URL = `http://localhost:3000/anime/delete/${ID}`
+            const URL = `${APIURL}/anime/delete/${ID}`
             // console.log(URL)
             fetch(URL, ({
                 method: "DELETE",

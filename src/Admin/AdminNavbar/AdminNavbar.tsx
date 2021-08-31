@@ -14,6 +14,7 @@ type tooltips = {
     logoutAdminBoolean: boolean,
     logoutBothBoolean: boolean,
 }
+
 export default class AdminNavbar extends Component<props, tooltips>{
     constructor(props: any){
         super(props)

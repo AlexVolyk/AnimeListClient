@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import { BsSearch, } from "react-icons/bs";
 import DisplayUser from "./DisplayUser/DisplayUser";
+import APIURL from "../../helpers/environment"
 
 type props = {
     adminToken: string, 
@@ -39,7 +40,7 @@ export default class EditAnimeDelete extends Component<props, types>{
     }
 
     async findUser(){
-        const URL = `http://localhost:3000/user/allUsers`;
+        const URL = `${APIURL}/user/allUsers`;
         fetch(URL, {
             method: "GET",
             headers: new Headers({

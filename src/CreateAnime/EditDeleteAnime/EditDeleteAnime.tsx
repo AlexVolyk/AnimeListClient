@@ -3,6 +3,7 @@ import { BsSearch } from "react-icons/bs";
 import sweetalert2 from "sweetalert2";
 import DisplayEditDelete from "./DisplayEditDelete";
 import './editdeleteanime.css'
+import APIURL from '../../helpers/environment'
 
 
 type types = {
@@ -61,7 +62,7 @@ export default class EditAnimeDelete extends Component<{adminToken: any}, types>
     }
 
     findAnime(){
-        const URL = `http://localhost:3000/anime/find/${this.state.findName}`;
+        const URL = `${APIURL}/anime/find/${this.state.findName}`;
         fetch(URL)
             .then(res => res.json())
             .then(json => {

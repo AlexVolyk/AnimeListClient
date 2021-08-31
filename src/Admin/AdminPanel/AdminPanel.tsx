@@ -8,13 +8,13 @@ type props = {
     adminToken: string,
 }
 
-type p = {
+type booleans = {
     createAnimeBoolean: boolean,
     edit_deleteAnimeBoolean: boolean,
     find_userBoolean: boolean,
 
 }
-export default class AdminNavbar extends Component<props, p>{
+export default class AdminNavbar extends Component<props, booleans>{
     constructor(props: any){
         super(props)
         this.state = {

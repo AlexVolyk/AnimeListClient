@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import sweetalert2 from "sweetalert2"
+import APIURL from '../../helpers/environment'
 
 type props = {
     userToken: string,
@@ -50,7 +51,7 @@ export default class EditUser extends Component<props, info> {
         e.preventDefault()
         const ID = this.props.userId
         // console.log(ID)
-        const URL = `http://localhost:3000/user/edit/user/${ID}`;
+        const URL = `${APIURL}/user/edit/user/${ID}`;
         fetch(URL, {
             method: "PUT",
             body: JSON.stringify({

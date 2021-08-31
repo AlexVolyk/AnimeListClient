@@ -3,6 +3,7 @@ import {Modal, Form} from 'react-bootstrap';
 import sweetalert2 from "sweetalert2"
 import {AiFillEye, AiFillEyeInvisible} from 'react-icons/ai'
 import './adminlogin.css';
+import APIURL from '../helpers/environment'
 
 type props = {
     adminShowLoginFunction: Function,
@@ -82,7 +83,7 @@ export default class SignUp extends Component<props, info> {
     handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
 
-        const URL = 'http://localhost:3000/admin/login';
+        const URL = `${APIURL}/admin/login`;
         fetch(URL, {
             method: "POST",
             body: JSON.stringify({

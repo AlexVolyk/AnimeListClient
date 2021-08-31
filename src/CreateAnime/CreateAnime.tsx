@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import { Form } from "react-bootstrap";
 import sweetalert2 from "sweetalert2";
 import './createanime.css'
+import APIURL from '../helpers/environment'
 
 type props = {
     adminToken: string,
@@ -159,7 +160,7 @@ export default class CreateAnime extends Component<props, types>{
 
     //! PARSE ANIME
     async parserFunction() {
-        const URL = "http://localhost:3000/anime/pars";
+        const URL = `${APIURL}/anime/pars`;
         fetch(URL, {
             method: "POST",
             body: JSON.stringify({
@@ -225,7 +226,7 @@ export default class CreateAnime extends Component<props, types>{
     //! CREATE ANIME
     handleSubmit(e: React.FormEvent<HTMLFormElement>){
         e.preventDefault()
-        const cURL = "http://localhost:3000/anime/create";
+        const cURL = `${APIURL}/anime/create`;
         fetch(cURL, {
             method: "POST",
             body: JSON.stringify({

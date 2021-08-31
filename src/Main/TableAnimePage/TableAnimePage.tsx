@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 import DisplayAnimePage from './DisplayAnimePage/DisplayAnimePage'
+import APIURL from '../../helpers/environment'
+
 type props = {
 
 }
@@ -26,7 +28,7 @@ export default class TableAnimePage extends Component<props, current>{
     }
     
     getOneAnime() {
-        const URL = "http://localhost:3000/anime/all"
+        const URL = `${APIURL}/anime/all`
         fetch(URL)
             .then(res => res.json())
             .then(json => {

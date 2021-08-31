@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import sweetalert2 from "sweetalert2";
+import APIURL from '../../helpers/environment'
 
 type props = {
     userToken: string,
@@ -22,7 +23,7 @@ export default class DeleteUser extends Component<props, info> {
     //! DELETE FETCH
     delete = (ID:any): void => {
         // console.log(ID)
-        const URL = `http://localhost:3000/user/delete/user/${ID}`;
+        const URL = `${APIURL}/user/delete/user/${ID}`;
         fetch(URL, {
             method: "DELETE",
             headers: new Headers({

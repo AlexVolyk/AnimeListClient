@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import DisplayAnimeList from "./Display/DisplayAnimeList";
 import './table.css'
+import APIURL from '../../helpers/environment'
 
 
 type props = {
@@ -31,7 +32,7 @@ export default class Table extends Component<props, current>{
     }
     
     getAnimes() {
-        const URL = "http://localhost:3000/anime/all"
+        const URL = `${APIURL}/anime/all`
         fetch(URL)
             .then(res => res.json())
             .then(json => {
