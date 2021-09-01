@@ -153,7 +153,8 @@ export default class CreateAnime extends Component<props, types>{
             rating: "",
             img: "",
             animeType: "",
-            youTubeVideo: ""
+            youTubeVideo: "",
+            parsUrl: ""
         })
     }
 
