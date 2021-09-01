@@ -24,9 +24,9 @@ export default class SignUp extends Component<props, info> {
     constructor(props: any){
         super(props)
         this.state = {
-            username: 'kozaklyho',
-            email: 'kozaklyho@gmail.com',
-            password: 'kozaklyho' ,
+            username: '',
+            email: '',
+            password: '' ,
             adminToken: '',
             showPasswordBoolean: false,
 
