@@ -8,7 +8,7 @@
     bottom: auto;
     background-color: #866161;
     overflow-y: scroll;
-    z-index: 99;
+    z-index: 100;
 }
 .admin-panel::-webkit-scrollbar-thumb {
     background: rgb(134, 107, 107);

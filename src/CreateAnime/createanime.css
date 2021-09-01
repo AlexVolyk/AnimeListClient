@@ -4,11 +4,16 @@
     font-size: 13px;
 }
 
-#parse {
+#parse-input {
     padding: 10px;
     outline: none;
     border: none;
     border-radius: 10px;
+    color: black;
+}
+
+.parse-btn{
+    color: black;
 }
 
 .create-form{
@@ -22,12 +27,14 @@
 .anime-form > div > input{
     padding: 6px;
     border-radius: 10px;
+    color: black;
 }
 
 .create-form input{
     padding: 6px;
     margin-bottom: 10px;
     border: none;
+    outline: none;
     opacity: 1;
     transition: 0.3s;
     transition-property: opacity;
@@ -47,6 +54,7 @@
     /* display: block; */
     border: none;
     outline: none;
+    color: black;
     
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
@@ -81,7 +89,7 @@
 }
 
 .create-btn:active{
-    background-color: blue;
+    background-color: rgb(28, 28, 29);
     transition: 0.3s;
     transition-property: background-color;
 }
@@ -98,6 +106,7 @@
 .create-form .container > textarea, input{
     margin-bottom: 0px !important;
 }
+
 
 .container {
     display: grid;

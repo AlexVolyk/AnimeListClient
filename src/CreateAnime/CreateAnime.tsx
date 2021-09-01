@@ -285,12 +285,12 @@ export default class CreateAnime extends Component<props, types>{
             <>               
             <input type="text" 
             name="parse" 
-            id="parse"
+            id="parse-input"
             placeholder="Parse URL *MyAnimeList"
             onChange={this.setParsUrl}
             value={this.state.parsUrl}
             />
-            <button className="create-btn" onClick={this.parserFunction}>Parse</button>
+            <button className="create-btn parse-btn" onClick={this.parserFunction}>Parse</button>
             <Form className=" create-form" onSubmit={this.handleSubmit}>
                 <div className="container anime-form">
                     <div className="Title">
