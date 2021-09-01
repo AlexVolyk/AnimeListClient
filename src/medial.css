@@ -1,0 +1,98 @@
+@media(max-width: 1260px){
+    .main{
+        background-size: cover;
+    }
+    .container-header{
+        width: auto;
+    }
+    .container-main{
+        width: auto;
+    }
+
+    .anime-page{
+        width: 1140px;
+    }
+
+    .anime-top-info {
+        width: 420px;
+    }
+}
+
+@media(max-width: 1200px){
+    .anime-page{
+        width: 1020px;
+    }
+    
+    .anime-top-info {
+        width: 310px;
+    }
+}
+
+@media(max-width: 1060px){
+    iframe{
+        width: 320px;
+        height: 200px;
+    }
+
+    .anime-page{
+        width: 910px;
+    }
+    
+    .anime-top-info {
+        width: 280px;
+    }
+    
+}
+
+@media(max-width: 940px){
+    .anime-page{
+        width: auto;
+    }
+
+    .anime-page-top{
+        display: grid;
+    }
+    .anime-page > anime-page-top > img {
+        margin: 0 auto;
+        margin-top: 30px;
+    }
+
+    .anime-top-info{
+        width: 305px;
+        margin: 0 auto;
+    }
+
+    .iframe-container{
+        position: static;
+        margin: 0 auto;
+    }
+
+    .page-anime-info{
+        width: 320px;
+        margin: 0 auto;
+        margin-top: 15px;
+        margin-bottom: 20px;
+    }
+}
+
+
+@media(max-width: 715px){
+    .main{
+        background-size: cover;
+    }
+    .genres-menu{
+        flex-direction: none;
+    }
+}
+
+@media(max-width: 500px){
+    .anime-page{
+        padding: 0;
+    }
+}
+
+
+/* 
+.container-main{
+    width: auto;
+} */

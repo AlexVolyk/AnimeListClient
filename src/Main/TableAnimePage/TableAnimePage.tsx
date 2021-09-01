@@ -32,12 +32,12 @@ export default class TableAnimePage extends Component<props, current>{
         fetch(URL)
             .then(res => res.json())
             .then(json => {
-                console.log(json, "TableAnimePage")
+                // console.log(json, "TableAnimePage")
                 let findName = window.location.pathname.replace('/anime/', '')
                 let findThisName = findName.replaceAll('_', ' ')
                 let regEx = new RegExp(`^${findThisName}$`)
 
-                console.log(regEx, "regEx")
+                // console.log(regEx, "regEx")
                 let a = json.filter((anime:any) => anime.title_name.match(regEx))
                 // console.log(a, "=======================")
                 this.setOneAnime(a)

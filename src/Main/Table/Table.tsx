@@ -28,7 +28,7 @@ export default class Table extends Component<props, current>{
         this.setState({
             smt: [...g]
         })
-        console.log(this.state.smt, "PARENT")
+        // console.log(this.state.smt, "PARENT")
     }
     
     getAnimes() {
