@@ -1,6 +1,6 @@
 @media(max-width: 1260px){
     .main{
-        background-size: cover;
+        background-size: cover !important;
     }
     .container-header{
         width: auto !important;
@@ -78,7 +78,7 @@
 
 @media(max-width: 715px){
     .main{
-        background-size: cover;
+        background-size: cover !important;
     }
     .genres-menu{
         flex-direction: none;
