@@ -185,7 +185,7 @@ export default class Navbar extends Component<props, dropdown>{
                         <div className="genres-block">
                             <NavbarToggler onClick={this.dropDownGenresToggle} className="mr-2 navbar-main-hover">Genres</NavbarToggler>
                             <Collapse isOpen={this.state.dropDownGenresBoolean} navbar className="genres-menu-inner">
-                                <Nav navbar className="genres-menu" style={{display: "inline-flex"}}>
+                                <Nav navbar className="genres-menu">
                                     <li className="block-inner">{genresBlock1}</li>
                                     <li className="block-inner">{genresBlock2}</li>
                                     <li className="block-inner">{genresBlock3}</li>

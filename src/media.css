@@ -80,7 +80,11 @@
     .main{
         background-size: cover !important;
     }
+    .navbar-nav{
+        display: block !important;
+    }
     .genres-menu{
+        display: block !important;
         flex-direction: none !important;
     }
 }
@@ -88,6 +92,9 @@
 @media(max-width: 500px){
     .anime-page{
         padding: 0 !important;
+    }
+    .block-inner{
+        padding: 10px !important;
     }
 }
 
