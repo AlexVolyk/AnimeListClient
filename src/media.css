@@ -3,10 +3,10 @@
         background-size: cover;
     }
     .container-header{
-        width: auto;
+        width: auto !important;
     }
     .container-main{
-        width: auto;
+        width: auto !important;
     }
 
     .anime-page{
@@ -46,7 +46,7 @@
 
 @media(max-width: 940px){
     .anime-page{
-        width: auto;
+        width: auto !important;
     }
 
     .anime-page-top{
