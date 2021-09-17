@@ -9,7 +9,7 @@ type props = {
 }
 
 type current = {
-    smt: Array<Object>,
+    animesFromFetch: Array<Object>,
 
 }
 
@@ -17,16 +17,16 @@ export default class Table extends Component<props, current>{
     constructor(props: any){
         super(props)
         this.state = {
-            smt: [],
+            animesFromFetch: [],
         }
         
         this.getAnimes = this.getAnimes.bind(this)
-        this.setAnimes = this.setAnimes.bind(this)
+        this.setAnimesFromFetch = this.setAnimesFromFetch.bind(this)
     }
 
-    setAnimes(g: Array<Object>) {
+    setAnimesFromFetch(g: Array<Object>) {
         this.setState({
-            smt: [...g]
+            animesFromFetch: [...g]
         })
         // console.log(this.state.smt, "PARENT")
     }
@@ -37,7 +37,7 @@ export default class Table extends Component<props, current>{
             .then(res => res.json())
             .then(json => {
                 // console.log(json)
-                this.setAnimes(json)
+                this.setAnimesFromFetch(json)
             })
     }
 
@@ -51,9 +51,9 @@ export default class Table extends Component<props, current>{
     render(){
         
         return(
-            <div className="display-table">
+            <>
                 <DisplayAnimeList {...this.state}/>
-            </div>
+            </>
         )
     }
 }

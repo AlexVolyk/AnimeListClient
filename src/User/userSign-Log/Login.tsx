@@ -75,6 +75,7 @@ export default class Login extends Component<props, info> {
 
     handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault()
+        console.log(APIURL)
         const URL = `${APIURL}/user/login`;
         fetch(URL, {
             method: "POST",

@@ -25,7 +25,8 @@ type props = {
 type dropdown = {
     dropDownMenuBoolean: boolean,
     dropDownGenresBoolean: boolean,
-    deleteBoolean: boolean
+    dropDownTypeBoolean: boolean,
+    deleteBoolean: boolean,
 }
 
 
@@ -35,10 +36,12 @@ export default class Navbar extends Component<props, dropdown>{
         this.state = {
             dropDownMenuBoolean: false,
             dropDownGenresBoolean: false,
-            deleteBoolean: false
+            dropDownTypeBoolean: false,
+            deleteBoolean: false,
         }
         this.dropDownMenuToggle = this.dropDownMenuToggle.bind(this)
         this.dropDownGenresToggle = this.dropDownGenresToggle.bind(this)
+        this.dropDownTypeToggle = this.dropDownTypeToggle.bind(this)
         this.deleteToggle = this.deleteToggle.bind(this)
 
     }
@@ -46,7 +49,8 @@ export default class Navbar extends Component<props, dropdown>{
     dropDownMenuToggle = (): void => {
         this.setState({
             dropDownMenuBoolean: !this.state.dropDownMenuBoolean,
-            dropDownGenresBoolean: false
+            dropDownGenresBoolean: false,
+            dropDownTypeBoolean: false
         })
         // console.log(this.state.dropDownMenuBoolean)
     }
@@ -54,7 +58,17 @@ export default class Navbar extends Component<props, dropdown>{
     dropDownGenresToggle = (): void => {
         this.setState({
             dropDownGenresBoolean: !this.state.dropDownGenresBoolean,
-            dropDownMenuBoolean: false
+            dropDownMenuBoolean: false,
+            dropDownTypeBoolean: false,
+        })
+        // console.log(this.state.dropDownGenresBoolean)
+    }
+    
+    dropDownTypeToggle = (): void => {
+        this.setState({
+            dropDownTypeBoolean: !this.state.dropDownTypeBoolean,
+            dropDownGenresBoolean: false,
+            dropDownMenuBoolean: false,
         })
         // console.log(this.state.dropDownGenresBoolean)
     }
@@ -96,7 +110,7 @@ export default class Navbar extends Component<props, dropdown>{
         let block5 = ["Shounen", "Shounen Ai", "Slice of Life", "Space", "Sports", "Super Power", "Supernatural", "Thriller"]
         let block6 = ["Vampire", "Yaoi", "Yuri"]
 
-        let genresBlock1 = block1.map((genre: any, key: number) => {
+        let genresBlock1 = block1.map((genre: string, key: number) => {
             let gen;
             if(genre.includes(' ')) {
                 gen = genre.replaceAll(' ', '_')
@@ -109,7 +123,7 @@ export default class Navbar extends Component<props, dropdown>{
             </NavItem>
             )
         })
-        let genresBlock2 = block2.map((genre: any, key: number) => {
+        let genresBlock2 = block2.map((genre: string, key: number) => {
             let gen;
             if(genre.includes(' ')) {
                 gen = genre.replaceAll(' ', '_')
@@ -122,7 +136,7 @@ export default class Navbar extends Component<props, dropdown>{
             </NavItem>
             )
         })
-        let genresBlock3 = block3.map((genre: any, key: number) => {
+        let genresBlock3 = block3.map((genre: string, key: number) => {
             let gen;
             if(genre.includes(' ')) {
                 gen = genre.replaceAll(' ', '_')
@@ -135,7 +149,7 @@ export default class Navbar extends Component<props, dropdown>{
             </NavItem>
             )
         })
-        let genresBlock4 = block4.map((genre: any, key: number) => {
+        let genresBlock4 = block4.map((genre: string, key: number) => {
             let gen;
             if(genre.includes(' ')) {
                 gen = genre.replaceAll(' ', '_')
@@ -148,7 +162,7 @@ export default class Navbar extends Component<props, dropdown>{
             </NavItem>
             )
         })
-        let genresBlock5 = block5.map((genre: any, key: number) => {
+        let genresBlock5 = block5.map((genre: string, key: number) => {
             let gen;
             if(genre.includes(' ')) {
                 gen = genre.replaceAll(' ', '_')
@@ -161,7 +175,7 @@ export default class Navbar extends Component<props, dropdown>{
             </NavItem>
             )
         })
-        let genresBlock6 = block6.map((genre: any, key: number) => {
+        let genresBlock6 = block6.map((genre: string, key: number) => {
             let gen;
             if(genre.includes(' ')) {
                 gen = genre.replaceAll(' ', '_')
@@ -171,6 +185,26 @@ export default class Navbar extends Component<props, dropdown>{
             return(
             <NavItem key={key}>
                 <a href={"/genre/" + gen.toLowerCase()} className="genres-item">{genre}</a>
+            </NavItem>
+            )
+        })
+
+
+        //                 let b = animeTypes.sort(function (a, b){
+        //     if(a > b){
+        //         return 1
+        //     } else if (a < b) {
+        //         return -1
+        //     } else {
+        //         return 0
+        //     }
+        // })
+        // console.log(b)
+                let animeTypes = ["Movie", "ONA", "OVA", "TV"]
+                let typeNavBar = animeTypes.map((type: string, key: number) => {
+            return(
+            <NavItem key={key}>
+                <a href={"/type/" + type.toLowerCase()} className="type-item">{type}</a>
             </NavItem>
             )
         })
@@ -195,10 +229,18 @@ export default class Navbar extends Component<props, dropdown>{
                                 </Nav>
                             </Collapse>
                         </div>
+                        <div className="type-block">
+                            <NavbarToggler onClick={this.dropDownTypeToggle} className="mr-2 navbar-main-hover">Type</NavbarToggler>
+                            <Collapse isOpen={this.state.dropDownTypeBoolean} navbar className="type-menu-inner">
+                                <Nav navbar className="type-menu">
+                                    <li className='block-inner'>{typeNavBar}</li>
+                                </Nav>
+                            </Collapse>
+                        </div>
                             <a href="/" className="main-link navbar-main-hover">Main</a>
                         <div className="user-menu-block">
                             <NavbarToggler onClick={this.dropDownMenuToggle} className="mr-2 navbar-main-hover">User</NavbarToggler>
-                            <Collapse isOpen={this.state.dropDownMenuBoolean} navbar className="user-links-block">
+                            <Collapse isOpen={this.state.dropDownMenuBoolean} navbar style={{right: '0'}} className="user-links-block">
                                 <Nav navbar>
                                     <NavItem className="user-links-inner">
                                         <a href="/" onClick={() => this.props.lou()} className="user-link">Logout</a>
@@ -215,6 +257,7 @@ export default class Navbar extends Component<props, dropdown>{
                     </div>
 
                     <Switch>
+                        
                         <Route path='/register'>
                             <SignUp {...this.props}/>
                         </Route>
@@ -224,10 +267,31 @@ export default class Navbar extends Component<props, dropdown>{
                         <Route path='/delete/account'>
                             {disp}
                         </Route>
+                        <Route path='/page/:num'>
+                            <Table/>
+                        </Route>
+                        {/* <Route path='/anime/:num/:animeName'>
+                            <TableAnimePage />
+                        </Route> */}
                         <Route path='/anime/:animeName'>
                             <TableAnimePage />
                         </Route>
                         <Route path='/login'>
+                            <Table/>
+                        </Route>
+                        <Route path='/genre/:genre'> {/*//! type */}
+                            <Table/>
+                        </Route>
+                        <Route path='/genre/:genre/page/:page'>
+                            <Table/>
+                        </Route>
+                        <Route path='/type/:type'> {/*//! type */}
+                            <Table/>
+                        </Route>
+                        <Route path='/type/:type/page/:num'> {/*//! type */}
+                            <Table/>
+                        </Route>
+                        <Route path='/year/:year'> {/*//! year */}
                             <Table/>
                         </Route>
                         <Route path='/'>

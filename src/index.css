@@ -28,7 +28,8 @@ img {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 7px;
+  width: 11px;
+
 }
 
 /* Track */
@@ -36,20 +37,31 @@ img {
   background: #000000;
 }
 
+
+/* ::-webkit-scrollbar-thumb {
+  background: red;
+  border-right: 4px transparent solid;
+  background-clip: padding-box;
+} */
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  /* background: rgb(153, 83, 83); */
+
   background-color: rgba(255, 255, 255, 0.5);
+  border: 3px transparent solid;
+  /* border-left: 2px transparent solid; */
+  background-clip: padding-box;
   border-radius: 8px;
   transition: 0.3s;
-  transition-property: background-color;
+  transition-property: background-color, border;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(255, 255, 255);
-  transition: 0.3s;
-  transition-property: background-color;
+  background-color: rgb(255, 255, 255);
+  border: 3px transparent solid;
+  /* transition: 0.3s;
+  transition-property: background-color, border; */
 }
 
 code {

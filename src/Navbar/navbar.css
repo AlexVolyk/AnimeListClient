@@ -87,6 +87,16 @@
     text-decoration: underline;
 }
 
+.type-item{
+    color: black;
+    text-decoration: none;
+}
+
+.type-item:hover{
+    color: black;
+    text-decoration: underline;
+}
+
 .navbar-main-hover{
     color: pink !important;
     transition: 0.3s !important;

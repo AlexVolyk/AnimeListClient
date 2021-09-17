@@ -110,6 +110,14 @@
 
 }
 
+@media(max-width: 400px) {
+    .pagination-li{
+        padding: 0 8px !important;
+    }
+    .pagination-btn{
+        padding: 1px;
+    }
+}
 
 /* 
 .container-main{
