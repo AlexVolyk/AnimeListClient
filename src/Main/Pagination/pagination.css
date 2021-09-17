@@ -15,7 +15,8 @@
 
 .pagination-li{
     padding: 0 10px;
-    padding-top: 8px;
+    padding-top: 1px;
+    /* padding-top: 8px; */
 }
 
 .pagination-link{
@@ -33,7 +34,7 @@
 
 .pagination-btn{
     /* margin-bottom: 0 !important; */
-    font-size: 30px;
+    font-size: 40px;
     /* color: white !important; */
     background-color: transparent;
     border: none;
