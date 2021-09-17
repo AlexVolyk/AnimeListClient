@@ -31,7 +31,7 @@ export default class DisplayAnimeList extends Component<props, current, send>{
             firstAnimeIndex: 0,
             lastAnimeindex: 0,
             currentPage: 1,
-            animesPerPage: 1,
+            animesPerPage: 3, //! how many animes
             currentAnime: 0,
             an: []
             
@@ -75,7 +75,7 @@ export default class DisplayAnimeList extends Component<props, current, send>{
         }
 
         let defFirstIndex = 0,
-            defLastIndex = 1;
+            defLastIndex = this.state.animesPerPage; //! how many animes
 
         var animeGenre:any,
             filtered:any;
@@ -178,7 +178,7 @@ export default class DisplayAnimeList extends Component<props, current, send>{
             
         } else {
             //! DEFAULT
-            currrentP = animes.slice(0, 1) // 0, 2
+            currrentP = animes.slice(0, this.state.animesPerPage) // 0, 2 //! how many animes
             // console.log(animes, 'animes ТУТА')
             // console.log(currrentP, 'currrentP ТУТА')
         }

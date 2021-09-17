@@ -32,7 +32,7 @@
 }
 
 .pagination-btn{
-    margin-bottom: 0 !important;
+    /* margin-bottom: 0 !important; */
     font-size: 30px;
     /* color: white !important; */
     background-color: transparent;
