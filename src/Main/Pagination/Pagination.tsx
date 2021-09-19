@@ -278,11 +278,11 @@ export default class Pagination extends Component<props, current>{
                         break;
                     case 3:
                         PN = PN.slice(locNum - 3, locNum + 2)
-                    break;
+                        break;
                 
                     default:
                         PN = PN.slice(locNum - 3, locNum + 2)
-                    break;
+                        break;
                 }
                 // console.log(PN.slice(locNum-2, locNum+2), '-')
                 // console.log(PN.slice(locNum-1, locNum+2), '-')
@@ -345,7 +345,7 @@ export default class Pagination extends Component<props, current>{
                             { !filteredPN.includes(1) ?
                             <>
                                 <li key={1} className="pagination-li">
-                                    <a href={firstSrc} style={{color: "white"}} className="pagination-link">1</a>
+                                    <a href={firstSrc} style={{color: "white"}} className="pagination-link">{(PNlast.length + 1) - PNlast.length}</a>
                                 </li> 
                                 <li key={1 - 1} className="pagination-li">
                                     <a style={{color: "white"}} className="pagination-dots">...</a>

@@ -182,43 +182,57 @@ export default class DisplayAnimeList extends Component<props, current, send>{
             // console.log(animes, 'animes ТУТА')
             // console.log(currrentP, 'currrentP ТУТА')
         }
-        
+
+        function displayCurrentPageAnimeList(currrentP:Array<Object>) {
+            return(
+                currrentP.map((anime: any, key: number) => {
+
+                    let src = '/anime/' + anime.title_name.replaceAll(' ', "_")
+
+                return(
+                <div className="card-container" key={key}>
+                    <a href={src}>
+                        <img src={anime.img} 
+                        alt={anime.title_name} 
+                        title={anime.title_name} 
+                        className="anime-list-img" />
+                    </a>
+                    <div className="info">
+                        <p><span>Title: </span>{anime.title_name}</p>
+                        <p><span>English Title: </span>{anime.title_english}</p>
+                        <p><span>Type: </span>{anime.animeType}</p>
+                        <p><span>Episodes: </span>{anime.episodes}</p>
+                        <p><span>Duration: </span>{anime.duration}</p>
+                    </div>
+                </div>
+                )}))
+        }
         return(
             <>
                 <div className="display-table">
                     {currrentP.length !== 0 && animes[0] !== null ? (
-                        
-                        currrentP.map((anime: any, key: number) => {
 
-                            let src = '/anime/' + anime.title_name.replaceAll(' ', "_")
+                    <>
+                    {displayCurrentPageAnimeList(currrentP)}
+                    </>
 
-                        return(
-                        <div className="card-container" key={key}>
-                            <a href={src}>
-                                <img src={anime.img} 
-                                alt={anime.title_name} 
-                                title={anime.title_name} 
-                                className="anime-list-img" />
-                            </a>
-                            <div className="info">
-                                <p><span>Title: </span>{anime.title_name}</p>
-                                <p><span>English Title: </span>{anime.title_english}</p>
-                                <p><span>Type: </span>{anime.animeType}</p>
-                                <p><span>Episodes: </span>{anime.episodes}</p>
-                                <p><span>Duration: </span>{anime.duration}</p>
-                            </div>
-                        </div>
-                    )}
-                    )
                     ) : (
                         <div className="not-found-animes">NOT FOUND</div>
                         )
-                        }
+                    }
+
                 </div>
+                {currrentP.length !== 0 && animes[0] !== null ? (
+
                 <Pagination {...this.state}
                 totalAnimes={animes.length} 
                 urlSend={path}
                 />
+                
+                ) : (
+                        null
+                    )
+                }
             </>
         )
     }

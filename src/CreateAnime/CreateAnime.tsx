@@ -189,6 +189,7 @@ export default class CreateAnime extends Component<props, types>{
             if (json.parsThis !== undefined){
 
                 let get = json.parsThis
+                // console.log(get.genres)
                 let regExp = new RegExp('([a-z])([A-Z])' ,"g")
                 let regExpGanres = get.genres.replace(regExp, '$1, $2');
 
