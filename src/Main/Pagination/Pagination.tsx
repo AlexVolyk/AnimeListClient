@@ -240,7 +240,7 @@ export default class Pagination extends Component<props, current>{
         let urlS = this.props.urlSend
         var filteredPN = PN;
         console.log(this.props.urlSend, 'j')
-        function pageNumberDisplay(){
+        function pageNumbersDisplay(){
             console.log(urlS, "urlS")
             // console.log(this.props.urlSend, "PN")
             console.log(PN, "PN")
@@ -331,7 +331,7 @@ export default class Pagination extends Component<props, current>{
         // console.log(PNlast, PNlast.length, 'SAASADS')
         // console.log(lastSrc, 'lastSrc')
         console.log(filteredPN, 'filteredPN')
-        console.log(pageNumberDisplay())
+        console.log(pageNumbersDisplay())
         return(
             <>
                 <div className="pagination">
@@ -354,7 +354,7 @@ export default class Pagination extends Component<props, current>{
                             :
                                 null
                             }
-                            {pageNumberDisplay()}
+                            {pageNumbersDisplay()}
                             { !filteredPN.includes(PNlast.length) ?
                             <>
                                 <li key={PNlast.length + 1} className="pagination-li">
