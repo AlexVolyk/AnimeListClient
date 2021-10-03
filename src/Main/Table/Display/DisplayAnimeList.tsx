@@ -81,7 +81,7 @@ export default class DisplayAnimeList extends Component<props, current, send>{
             filtered:any;
 
         var currrentP,
-            animes:any = this.props.animesFromFetch //.reverse(); //! REVERSE
+            animes:any = this.props.animesFromFetch.reverse(); //! REVERSE
 
         var path;
         

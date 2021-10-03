@@ -17,7 +17,7 @@ export default class Table extends Component<props, current>{
     constructor(props: any){
         super(props)
         this.state = {
-            animesFromFetch: [].reverse(),
+            animesFromFetch: [],
         }
         
         this.getAnimes = this.getAnimes.bind(this)
