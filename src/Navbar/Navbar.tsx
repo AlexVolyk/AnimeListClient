@@ -240,7 +240,7 @@ export default class Navbar extends Component<props, dropdown>{
                             <a href="/" className="main-link navbar-main-hover">Main</a>
                         <div className="user-menu-block">
                             <NavbarToggler onClick={this.dropDownMenuToggle} className="mr-2 navbar-main-hover">User</NavbarToggler>
-                            <Collapse isOpen={this.state.dropDownMenuBoolean} navbar style={{right: '0'}} className="user-links-block">
+                            <Collapse isOpen={this.state.dropDownMenuBoolean} navbar className="user-links-block">
                                 <Nav navbar>
                                     <NavItem className="user-links-inner">
                                         <a href="/" onClick={() => this.props.lou()} className="user-link">Logout</a>

@@ -110,13 +110,19 @@
 
 }
 
+@media(max-width: 420px) {
+    .user-links-block{
+        right: 0;
+    }
+}
+
 @media(max-width: 400px) {
     .pagination-li{
         padding: 0 8px !important;
     }
-    .pagination-btn{
-        /* padding: 1px; */
-    }
+    /* .pagination-btn{
+        padding: 1px;
+    } */
 }
 
 /* 
