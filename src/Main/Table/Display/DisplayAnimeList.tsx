@@ -48,7 +48,7 @@ export default class DisplayAnimeList extends Component<props, current, send>{
 
     render(){
         let currentPage = this.state.currentPage;
-        console.log(currentPage, 's-------------------------------------')
+        // console.log(currentPage, 's-------------------------------------')
         currentPage = +this.state.urlPath.replace('/page/', '')
 
         // let urlPathname = this.state.urlPath;
@@ -76,8 +76,8 @@ export default class DisplayAnimeList extends Component<props, current, send>{
 
         let defFirstIndex = 0,
             defLastIndex = this.state.animesPerPage; //! how many animes
-            console.log(defLastIndex, "defLastIndex");
-            console.log(defLastIndex.length, "defLastIndex.length");
+            // console.log(defLastIndex, "defLastIndex");
+            // console.log(defLastIndex.length, "defLastIndex.length");
             
 
         var animeGenre:any,
@@ -88,15 +88,15 @@ export default class DisplayAnimeList extends Component<props, current, send>{
 
         var path;
         
-        console.log(window.location.pathname , "here")
-        console.log(this.state.urlPath , "here")
+        // console.log(window.location.pathname , "here")
+        // console.log(this.state.urlPath , "here")
 
         if(this.state.urlPath === "/delete/account" || this.state.urlPath === "/login") {
             currrentP = animes.slice(firstIndex, lastIndex)
 
-            console.log(animes,'WTF')
-            console.log(currrentP, "WTF")
-            console.log(window.location.pathname)
+            // console.log(animes,'gere')
+            // console.log(currrentP, "here")
+            // console.log(window.location.pathname)
 
 
         } else if (this.state.urlPath.includes('/genre/'))  {
@@ -115,14 +115,14 @@ export default class DisplayAnimeList extends Component<props, current, send>{
                 animes = filtered
                 
                 currrentP = animes.slice(firstIndex, lastIndex)
-                console.log(firstIndex, "firstIndex")
-                console.log(lastIndex, "lastIndex")
+                // console.log(firstIndex, "firstIndex")
+                // console.log(lastIndex, "lastIndex")
 
                 path = '/genre/' + animeGenre
-                console.log(animes, "currrentPpppppp")
+                // console.log(animes, "currrentPpppppp")
 
                 // console.log(currrentP, "currrentPpppppp")
-                console.log(currrentP, "if")
+                // console.log(currrentP, "if")
 
 
             } else if (this.state.urlPath.includes('/genre/') ) {
@@ -136,7 +136,7 @@ export default class DisplayAnimeList extends Component<props, current, send>{
                 currrentP = animes.slice(defFirstIndex, defLastIndex)
                 path = '/genre/' + animeGenre
 
-                console.log(animes, "else if")
+                // console.log(animes, "else if")
             }
 
         } else if (this.state.urlPath.includes('/type/'))  {
