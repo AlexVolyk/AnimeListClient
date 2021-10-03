@@ -257,7 +257,6 @@ export default class Navbar extends Component<props, dropdown>{
                     </div>
 
                     <Switch>
-                        
                         <Route path='/register'>
                             <SignUp {...this.props}/>
                         </Route>
