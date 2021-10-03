@@ -76,6 +76,9 @@ export default class DisplayAnimeList extends Component<props, current, send>{
 
         let defFirstIndex = 0,
             defLastIndex = this.state.animesPerPage; //! how many animes
+            console.log(defLastIndex, "defLastIndex");
+            console.log(defLastIndex.length, "defLastIndex.length");
+            
 
         var animeGenre:any,
             filtered:any;
