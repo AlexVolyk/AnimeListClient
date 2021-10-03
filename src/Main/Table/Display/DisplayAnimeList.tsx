@@ -12,8 +12,7 @@ type current = {
     lastAnimeindex: any,
     currentPage: any,
     currentAnime: any,
-    animesPerPage: any,
-    an: any,
+    animesPerPage: any
 }
 
 type send = {
@@ -32,15 +31,13 @@ export default class DisplayAnimeList extends Component<props, current, send>{
             lastAnimeindex: 0,
             currentPage: 1,
             animesPerPage: 3, //! how many animes
-            currentAnime: 0,
-            an: []
+            currentAnime: 0
             
         }
 
     }
     
     
-
     componentDidMount(){
         let getLoc = window.location.pathname
         this.setState({urlPath: getLoc})
@@ -51,6 +48,7 @@ export default class DisplayAnimeList extends Component<props, current, send>{
         // console.log(currentPage, 's-------------------------------------')
         currentPage = +this.state.urlPath.replace('/page/', '')
 
+        console.log(this.props.animesFromFetch,"RIGHT HERE")
         // let urlPathname = this.state.urlPath;
 
         let one,
@@ -79,7 +77,6 @@ export default class DisplayAnimeList extends Component<props, current, send>{
             // console.log(defLastIndex, "defLastIndex");
             // console.log(defLastIndex.length, "defLastIndex.length");
             
-
         var animeGenre:any,
             filtered:any;
 
@@ -97,7 +94,6 @@ export default class DisplayAnimeList extends Component<props, current, send>{
             // console.log(animes,'gere')
             // console.log(currrentP, "here")
             // console.log(window.location.pathname)
-
 
         } else if (this.state.urlPath.includes('/genre/'))  {
             //! GENRE
@@ -185,6 +181,10 @@ export default class DisplayAnimeList extends Component<props, current, send>{
             // console.log(animes, 'animes ТУТА')
             // console.log(currrentP, 'currrentP ТУТА')
         }
+        console.log(currrentP,"currrentP")
+        console.log(animes,"animes")
+
+
 
         function displayCurrentPageAnimeList(currrentP:Array<Object>) {
             return(

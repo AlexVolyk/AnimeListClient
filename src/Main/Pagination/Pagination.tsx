@@ -25,7 +25,7 @@ export default class Pagination extends Component<props, current>{
 
 
     render(){
-        console.log(this.props.totalAnimes, 'TOTAL')
+        // console.log(this.props.totalAnimes, 'TOTAL')
         var PN: any = []
         var PNlast: any = []
         for(let i = 1; i <= Math.ceil(this.props.totalAnimes / this.props.animesPerPage); i++){
@@ -239,11 +239,11 @@ export default class Pagination extends Component<props, current>{
         //! DISPLAY PAGINATION ========================
         let urlS = this.props.urlSend
         var filteredPN = PN;
-        console.log(this.props.urlSend, 'j')
+        // console.log(this.props.urlSend, 'j')
         function pageNumbersDisplay(){
-            console.log(urlS, "urlS")
+            // console.log(urlS, "urlS")
             // console.log(this.props.urlSend, "PN")
-            console.log(PN, "PN")
+            // console.log(PN, "PN")
             let loc = window.location.pathname
             let lastIndex = +window.location.pathname.lastIndexOf('/')
             // console.log(loc, "loc")
@@ -256,18 +256,18 @@ export default class Pagination extends Component<props, current>{
             if (locNum === 0 || !loc.includes('/page/')) {
                 locNum = 1;
                 PN = PN.slice(locNum - 1, locNum + 2)
-                console.log(PN,'he')
+                // console.log(PN,'he')
 
             } else if (PN[locNum - 1] === locNum) {
                 
-                console.log(PN, "else if")
-                console.log(PN[locNum - 1], "PN[locNum - 1]")
-                console.log(PN.slice(locNum-3, locNum+2), '3')
-                console.log(PN.slice(locNum-2, locNum+2), '2')
-                console.log(PN.slice(locNum-1, locNum+2), '1')
-                console.log(PN.slice(locNum, locNum+2), '0')
+                // console.log(PN, "else if")
+                // console.log(PN[locNum - 1], "PN[locNum - 1]")
+                // console.log(PN.slice(locNum-3, locNum+2), '3')
+                // console.log(PN.slice(locNum-2, locNum+2), '2')
+                // console.log(PN.slice(locNum-1, locNum+2), '1')
+                // console.log(PN.slice(locNum, locNum+2), '0')
                 // PN = PN.slice(locNum-3, locNum+2)
-                console.log(PN, '-')
+                // console.log(PN, '-')
 
                 switch (locNum) {
                     case 1:
@@ -330,8 +330,8 @@ export default class Pagination extends Component<props, current>{
         let lastSrc = '/page/' + (PNlast.length)
         // console.log(PNlast, PNlast.length, 'SAASADS')
         // console.log(lastSrc, 'lastSrc')
-        console.log(filteredPN, 'filteredPN')
-        console.log(pageNumbersDisplay())
+        // console.log(filteredPN, 'filteredPN')
+        // console.log(pageNumbersDisplay())
         return(
             <>
                 <div className="pagination">
@@ -367,42 +367,7 @@ export default class Pagination extends Component<props, current>{
                             :
                                 null
                             }
-                            {/* <li key={PN.length - 1}>
-                            <a href={lastSrc} style={{color: "white"}} className="pagination-link">{PN.length - 1}</a>
-                            </li> */}
-                            {/* {PN.map((num: number) => {
-                                let src:string;
-                                let loc = window.location.pathname
-                                let lastIndex = +window.location.pathname.lastIndexOf('/')
-                                // console.log(loc, "loc")
-                                // console.log(lastIndex, "lastIndex")
 
-                                let pageLocNum = +loc.slice(lastIndex + 1, )
-                                // console.log(+loc.slice(lastIndex - 1, ), "+loc.slice(lastIndex + 1, )")
-                                // console.log(pageLocNum, "pageLocNum")
-                                let locNum = pageLocNum
-                                // console.log(locNum, "locNum")
-                                if (locNum === 0 || !loc.includes('/page/')) locNum = 1;
-
-                                    if (this.props.urlSend !== undefined) {
-                                        src = this.props.urlSend + '/page/' + num
-
-                                    } else {
-                                        src = '/page/' + num
-                                    }
-
-                                console.log(src, 'srcs')
-                                return(
-                                <li key={num} className="pagination-li">
-                                    { locNum === num ? (
-                                    <a href={src} style={{color: "purple", fontSize: '23px'}} className="pagination-link">{num}</a>
-                                    ) : (
-                                    <a href={src} style={{color: "white"}} className="pagination-link">{num}</a>)}
-                                </li>
-                                )
-                            }) 
-
-                            } */}
                             <li>
                                 <button className="pagination-btn" onClick={nextPage}>
                                     <RiArrowRightSLine />
