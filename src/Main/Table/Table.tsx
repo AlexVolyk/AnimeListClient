@@ -26,7 +26,7 @@ export default class Table extends Component<props, current>{
 
     setAnimesFromFetch(g: Array<Object>) {
         this.setState({
-            animesFromFetch: [...g]
+            animesFromFetch: [...g].reverse()  //! REVERSE
         })
         // console.log(this.state.smt, "PARENT")
     }
